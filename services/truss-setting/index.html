@@ -212,13 +212,13 @@
     display: flex; align-items: center; padding: 0 30px;
     background: var(--navy); border-bottom: 2px solid var(--red);
   }
-  .nav-inner { width: 100%; max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+  .nav-inner { width: 100%; max-width: 1340px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
   /* Logo slot: swap this typographic lockup for the real mark when the client supplies one */
   .nav-logo .mk { font-size: 1.05rem; line-height: 1; }
   .nav-logo .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; line-height: 0.95; }
   .nav-logo .tag { display: block; font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 0.55rem; color: var(--bone-mute); letter-spacing: 0.26em; text-transform: uppercase; margin-top: 2px; white-space: nowrap; }
-  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links { display: flex; gap: 20px; list-style: none; }
   .nav-links a {
     color: var(--bone); text-decoration: none; font-family: 'Big Shoulders', sans-serif; font-weight: 700;
     font-size: 1.08rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 0; position: relative; transition: color 0.2s ease; white-space: nowrap;
@@ -226,9 +226,14 @@
   .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px; background: var(--red); transition: width 0.22s ease; }
   .nav-links a:hover { color: #fff; }
   .nav-links a:hover::after { width: 100%; }
-  .nav-right { display: flex; gap: 18px; align-items: center; }
+  .nav-right { display: flex; gap: 14px; align-items: center; flex-shrink: 0; }
   .nav-phone { color: var(--bone); text-decoration: none; font-weight: 700; font-size: 1.12rem; font-family: 'Big Shoulders', sans-serif; letter-spacing: 0.05em; white-space: nowrap; }
   .nav-phone:hover { color: #fff; }
+
+  /* nav must never crowd: tighten, then drop to the hamburger before anything clips */
+  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .tag { display: none; } }
+  @media (max-width: 1240px) { .nav-phone { display: none; } }
+  @media (max-width: 1080px) { .nav-links, .nav-right { display: none; } .mobile-actions { display: flex !important; } }
 
   .mobile-actions { display: none; gap: 10px; align-items: center; }
   .mobile-call { width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: #fff; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 14px rgba(178,35,53,0.4); }
@@ -271,41 +276,57 @@
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .hero-ctas .btn { padding: 17px 30px; font-size: 1.24rem; }
 
-  /* ===== QUICK QUOTE (3-step, P&C qq pattern re-skinned) ===== */
-  .qq { background: #fff; border-radius: 6px; box-shadow: var(--shadow-md); padding: 26px 26px 22px; border-top: 5px solid var(--red); }
-  .qq-head b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.62rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.05; }
-  .qq-head span { font-size: 0.92rem; color: var(--ink-soft); display: block; margin-top: 4px; }
-  .qq-prog { display: flex; gap: 6px; margin: 16px 0 18px; }
-  .qq-prog i { flex: 1; height: 4px; border-radius: 2px; background: rgba(23,32,47,0.14); transition: background 0.25s ease; }
-  .qq-prog i.on { background: var(--red); }
+  /* ===== LIFT TICKET (quick quote). Riveted navy header ties it to the Fleet Board. ===== */
+  .qq { background: var(--bone); border-radius: 3px; box-shadow: var(--shadow-md); overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 20px); }
+  .qq-top { position: relative; background: var(--navy); color: var(--bone); padding: 15px 22px 14px; border-bottom: 3px solid var(--red); }
+  .qq-top::before, .qq-top::after { content: ''; position: absolute; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: rgba(244,243,238,0.3); }
+  .qq-top::before { left: 10px; } .qq-top::after { right: 10px; }
+  .qq-tag { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .qq-tag b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.13em; text-transform: uppercase; line-height: 1; }
+  .qq-tag i { font-style: normal; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.86rem; letter-spacing: 0.16em; text-transform: uppercase; color: #E8AEB6; white-space: nowrap; }
+  .qq-top p { font-size: 0.86rem; color: var(--bone-mute); margin-top: 4px; line-height: 1.4; }
+  .qq-bars { display: flex; gap: 4px; margin-top: 12px; }
+  .qq-bars i { flex: 1; height: 3px; background: rgba(244,243,238,0.22); transition: background 0.25s ease; }
+  .qq-bars i.on { background: var(--red); }
+  .qq-body { padding: 20px 22px 20px; }
   .qq-step { display: none; }
   .qq-step.on { display: block; }
-  .qq-tiles { display: flex; flex-direction: column; gap: 8px; }
+  /* current selection, shown on later steps, always changeable */
+  .qq-sel { display: none; align-items: center; gap: 10px; background: #fff; border: 1px dashed rgba(23,32,47,0.28); border-radius: 2px; padding: 9px 12px; margin-bottom: 15px; font-size: 0.86rem; color: var(--ink-soft); }
+  .qq-sel.on { display: flex; }
+  .qq-sel b { color: var(--ink); font-weight: 600; }
+  .qq-sel button { margin-left: auto; background: none; border: none; padding: 0; cursor: pointer; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); white-space: nowrap; }
+  .qq-sel button:hover { color: var(--red-hot); text-decoration: underline; }
+  .qq-tiles { display: flex; flex-direction: column; gap: 7px; }
   .qq-tile { display: block; position: relative; cursor: pointer; }
   .qq-tile input { position: absolute; opacity: 0; pointer-events: none; }
-  .qq-tile span { display: block; border: 1.5px solid rgba(23,32,47,0.16); border-radius: 4px; padding: 11px 14px; transition: border-color 0.18s ease, background 0.18s ease; }
-  .qq-tile b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.15; }
-  .qq-tile em { font-style: normal; font-size: 0.85rem; color: var(--ink-soft); display: block; margin-top: 1px; }
-  .qq-tile:hover span { border-color: rgba(178,35,53,0.5); }
-  .qq-tile input:checked + span { border-color: var(--red); background: rgba(178,35,53,0.06); box-shadow: inset 3px 0 0 var(--red); }
+  .qq-tile span { display: grid; grid-template-columns: 15px 1fr; column-gap: 12px; row-gap: 1px; align-items: center; background: #fff; border: 1.5px solid rgba(23,32,47,0.16); border-radius: 2px; padding: 11px 13px; transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+  /* square marker spans both text rows, not a pill or a plain box */
+  .qq-tile span::before { content: ''; grid-column: 1; grid-row: 1 / span 2; align-self: center; width: 15px; height: 15px; border: 2px solid rgba(23,32,47,0.28); transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; }
+  .qq-tile b { grid-column: 2; grid-row: 1; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); line-height: 1.15; }
+  .qq-tile em { grid-column: 2; grid-row: 2; font-style: normal; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.35; }
+  .qq-tile:hover span { border-color: rgba(178,35,53,0.55); }
+  .qq-tile input:checked + span { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+  .qq-tile input:checked + span::before { background: var(--red); border-color: var(--red); box-shadow: inset 0 0 0 2px #fff; }
   .qq-tile input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
   .qq-field { display: flex; flex-direction: column; margin-bottom: 12px; }
-  .qq-field label { font-size: 0.78rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
-  .qq-opt { font-weight: 500; color: var(--ink-soft); text-transform: none; letter-spacing: 0; }
-  .qq-field input { padding: 11px 13px; background: var(--porcelain); border: 1.5px solid rgba(23,32,47,0.18); border-radius: 3px; color: var(--ink); font-family: 'Public Sans', sans-serif; font-size: 0.96rem; }
-  .qq-field input:focus { outline: none; border-color: var(--red); background: #fff; box-shadow: 0 0 0 3px rgba(178,35,53,0.12); }
-  .qq-msg { font-size: 0.8rem; color: var(--ink-soft); margin-top: 5px; }
+  .qq-field label { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin-bottom: 5px; }
+  .qq-opt { font-family: 'Public Sans', sans-serif; font-weight: 500; font-size: 0.74rem; letter-spacing: 0; text-transform: none; color: var(--ink-soft); }
+  .qq-field input { padding: 11px 13px; background: #fff; border: 1.5px solid rgba(23,32,47,0.18); border-radius: 2px; color: var(--ink); font-family: 'Public Sans', sans-serif; font-size: 0.96rem; }
+  .qq-field input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(178,35,53,0.12); }
+  .qq-msg { font-size: 0.79rem; color: var(--ink-soft); margin-top: 5px; }
   .qq-err { display: none; font-size: 0.82rem; font-weight: 600; color: var(--red-hot); margin-top: 9px; }
   .qq-err.show { display: block; }
   .qq-nav { display: flex; gap: 9px; margin-top: 16px; }
-  .qq-nav .btn { flex: 1; padding: 13px 18px; font-size: 1.08rem; }
-  .qq-back { flex: 0 0 auto !important; background: transparent; color: var(--ink) !important; border: 1.5px solid rgba(23,32,47,0.22); box-shadow: none; padding: 13px 18px; border-radius: 2px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.08rem; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
-  .qq-back:hover { background: rgba(23,32,47,0.05); }
+  .qq-nav .btn { flex: 1; padding: 13px 18px; font-size: 1.1rem; }
+  .qq-back { flex: 0 0 auto; background: transparent; color: var(--ink); border: 1.5px solid rgba(23,32,47,0.24); box-shadow: none; padding: 13px 17px; border-radius: 2px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
+  .qq-back:hover { background: rgba(23,32,47,0.06); }
   .qq-hp { position: absolute; left: -9999px; }
-  .qq-done { display: none; text-align: center; padding: 12px 4px 6px; }
+  .qq-done { display: none; padding: 4px 0 2px; }
   .qq-done.on { display: block; }
   .qq-done b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 6px; }
-  .qq-done p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 14px; }
+  .qq-done p { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 14px; }
+  .qq-done .btn { width: 100%; }
 
   /* thin flag-stripe seam, the single stripe motif on the page */
   .hero-stripe { position: relative; z-index: 2; height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 72px, var(--bone) 72px 144px); opacity: 0.92; }
@@ -358,8 +379,8 @@
 
   /* ===== WHAT WE LIFT: alternating zigzag, no icon cards ===== */
   .lift { background: var(--porcelain-alt); }
-  .lift-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  .lift-intro { position: sticky; top: calc(var(--nav-h) + 32px); }
+  .lift-inner { max-width: 1180px; margin: 0 auto; }
+  .lift-intro { max-width: 720px; margin-bottom: 40px; }
   .lift-intro .headline { margin-bottom: 18px; }
   .lift-intro p { color: var(--ink-soft); font-size: 1.06rem; line-height: 1.65; margin-bottom: 12px; }
   .lift-intro p strong { color: var(--ink); font-weight: 600; }
@@ -371,12 +392,13 @@
   .zz-row:nth-child(even) .zz-media { order: 2; }
   .zz-media { aspect-ratio: 4 / 3; background: var(--navy); overflow: hidden; }
   .zz-media img { width: 100%; height: 100%; object-fit: cover; }
-  .zz-text { padding: 26px 30px 26px 4px; }
+  .zz-text { padding: 26px 30px 26px 4px; display: flex; flex-direction: column; }
   .zz-row:nth-child(even) .zz-text { padding: 26px 4px 26px 30px; }
   .zz-no { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--red); letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
   .zz-text h3 { font-size: 1.7rem; color: var(--ink); margin-bottom: 7px; line-height: 1.05; }
   .zz-text p { font-size: 0.99rem; color: var(--ink-soft); line-height: 1.58; margin-bottom: 14px; }
-  .zz-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.06rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); text-decoration: none; }
+  .zz-short { display: none; }
+  .zz-link { margin-top: auto; align-self: flex-start; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.06rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); text-decoration: none; }
   .zz-link:hover { color: var(--red-hot); }
   .zz-link i { font-style: normal; transition: transform 0.2s ease; }
   .zz-link:hover i { transform: translateX(4px); }
@@ -557,8 +579,7 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
-    .lift-inner { grid-template-columns: 1fr; gap: 34px; }
-    .lift-intro { position: static; }
+    .lift-intro { margin-bottom: 26px; }
     .steps { grid-template-columns: 1fr; gap: 0; }
     .step { padding: 0 0 26px 34px; }
     .step:last-child { padding-bottom: 0; }
@@ -590,9 +611,11 @@
     .hero-inner { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
     .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .hero-ctas .btn { width: 100%; padding: 15px 18px; font-size: 1.15rem; }
-    .qq { padding: 20px 18px 18px; }
-    .qq-head b { font-size: 1.42rem; }
-    .qq-nav .btn { font-size: 1.02rem; padding: 13px 14px; }
+    .qq-body { padding: 17px 16px 17px; }
+    .qq-top { padding: 13px 16px 12px; }
+    .qq-tag b { font-size: 1.16rem; }
+    .qq-nav .btn { font-size: 1.02rem; padding: 13px 12px; }
+    .qq-back { font-size: 1.02rem; padding: 13px 14px; }
     .cred-rail-inner { flex-direction: column; gap: 0; padding: 6px 0 8px; }
     .cred { padding: 7px 0; border-bottom: 1px solid rgba(244,243,238,0.08); }
     .cred:last-child { border-bottom: none; }
@@ -615,11 +638,14 @@
     .zz-row { grid-template-columns: 1fr; gap: 0; }
     .zz-row:nth-child(even) .zz-media { order: 0; }
     .zz-media { aspect-ratio: 16 / 10; }
-    .zz-text, .zz-row:nth-child(even) .zz-text { padding: 12px 13px 14px; }
+    .zz-row { height: 100%; display: flex; flex-direction: column; }
+    .zz-text, .zz-row:nth-child(even) .zz-text { padding: 12px 13px 14px; flex: 1; }
     .zz-no { font-size: 0.8rem; margin-bottom: 3px; }
-    .zz-text h3 { font-size: 1.1rem; margin-bottom: 0; }
+    .zz-text h3 { font-size: 1.06rem; margin-bottom: 0; line-height: 1.1; }
     .zz-text p { display: none; }
-    .zz-link { font-size: 0.86rem; margin-top: 7px; }
+    .zz-link { font-size: 0.88rem; padding-top: 9px; }
+    .zz-full { display: none; }
+    .zz-short { display: inline; }
 
     .bleed img { height: 300px; }
     .bleed figcaption { padding: 50px 20px 18px; }
@@ -735,11 +761,22 @@
   .sp-card .btn { width: 100%; }
   .sp-spec { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; }
   .sp-spec b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 12px; }
-  .sp-spec dl { display: flex; flex-direction: column; gap: 9px; margin: 0; }
-  .sp-spec .row { display: flex; justify-content: space-between; gap: 14px; font-size: 0.93rem; border-bottom: 1px dashed rgba(23,32,47,0.16); padding-bottom: 8px; }
+  .sp-spec dl { display: flex; flex-direction: column; gap: 11px; margin: 0; }
+  .sp-spec .row { display: block; border-bottom: 1px dashed rgba(23,32,47,0.16); padding-bottom: 10px; }
   .sp-spec .row:last-child { border-bottom: none; padding-bottom: 0; }
-  .sp-spec dt { color: var(--ink-soft); margin: 0; }
-  .sp-spec dd { color: var(--ink); font-weight: 600; margin: 0; text-align: right; }
+  .sp-spec dt { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 2px; }
+  .sp-spec dd { color: var(--ink); font-weight: 600; font-size: 0.97rem; line-height: 1.4; margin: 0; }
+
+  /* on-page lift ticket band */
+  .sp-quote { background: var(--navy); }
+  .sp-quote-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 0.92fr; gap: 54px; align-items: center; }
+  .sp-quote-copy .headline { color: var(--bone); margin-bottom: 14px; }
+  .sp-quote-copy p { font-size: 1.04rem; line-height: 1.65; color: var(--bone-mute); margin-bottom: 12px; }
+  .sp-quote-copy p strong { color: var(--bone); font-weight: 600; }
+  .sp-quote-copy .alt-call { display: inline-flex; align-items: baseline; gap: 10px; margin-top: 8px; font-size: 0.95rem; color: var(--bone-mute); }
+  .sp-quote-copy .alt-call a { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--bone); text-decoration: none; letter-spacing: 0.02em; }
+  .sp-quote-copy .alt-call a:hover { color: #fff; }
+  @media (max-width: 1024px) { .sp-quote-inner { grid-template-columns: 1fr; gap: 28px; } }
 
   .sp-other { background: var(--porcelain-alt); }
   .other-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
@@ -828,7 +865,7 @@
     <p class="lede">Your framing crew is only as fast as the truss on the hook. We keep the packages moving so the crew stays on the wall plate instead of standing around waiting.</p>
     <div class="sp-ctas">
       <a href="tel:+19544456186" class="btn" data-call>Call (954) 445-6186</a>
-      <a href="../../#contact" class="btn btn-ghost">Get a Lift Quote</a>
+      <a href="#qq" class="btn btn-ghost">Get a Lift Quote</a>
     </div>
   </div>
 </header>
@@ -854,10 +891,10 @@
     </div>
     <aside class="sp-aside">
       <div class="sp-card">
-        <b>Get a number today</b>
+        <b>Talk to the yard</b>
         <p>Tell us the weight, the height and the reach. We spec the machine and quote it on the call.</p>
         <a href="tel:+19544456186" class="big-phone" data-call>(954) 445-6186</a>
-        <a href="../../#contact" class="btn">Send the Details</a>
+        <a href="tel:+19544456186" class="btn" data-call>Reach Out</a>
       </div>
       <div class="sp-spec">
         <b>Quick spec</b>
@@ -869,6 +906,77 @@
         </dl>
       </div>
     </aside>
+  </div>
+</section>
+
+<section class="sp-quote">
+  <div class="sp-quote-inner">
+    <div class="sp-quote-copy">
+      <div class="rule" aria-hidden="true"></div>
+      <h2 class="headline">Price This Lift</h2>
+      <p>Already on the right page, so we have filled in the first question. <strong>Change it if your job is something else</strong> and send it either way.</p>
+      <p>Three questions, then we call you back with a real number.</p>
+      <span class="alt-call">Rather talk it out? <a href="tel:+19544456186" data-call>(954) 445-6186</a></span>
+    </div>
+    <form class="qq" id="qq" novalidate data-preselect="Trusses or roofing material">
+      <p class="qq-hp"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
+      <div class="qq-top">
+        <div class="qq-tag"><b>Lift Ticket</b><i id="qqCount">Step 1 / 3</i></div>
+        <p>Three questions. We call you back with a number.</p>
+        <div class="qq-bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div class="qq-body">
+        <div class="qq-sel" id="qqSel">Lifting: <b id="qqSelVal"></b><button type="button" id="qqChange">Change</button></div>
+
+        <div class="qq-step on" data-step="1">
+          <div class="qq-tiles" role="radiogroup" aria-label="What needs lifting">
+            <label class="qq-tile"><input type="radio" name="load" value="Rooftop AC unit"><span><b>Rooftop AC unit</b><em>Condenser or air handler onto a curb</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Trusses or roofing material"><span><b>Trusses or roofing</b><em>Truss packages, tile, shingle bundles</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Generator"><span><b>Generator</b><em>Standby set onto a pad or roof</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Pest-control tarps"><span><b>Pest-control tarps</b><em>Fumigation tenting over the roofline</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Something else"><span><b>Something else</b><em>Steel, trees, hot tubs, tight access, not sure</em></span></label>
+          </div>
+          <div class="qq-err" id="qqE1">Tap the closest one. We sort the details on the call.</div>
+        </div>
+
+        <div class="qq-step" data-step="2">
+          <div class="qq-field">
+            <label for="qq-where">Where is the job?</label>
+            <input type="text" id="qq-where" name="where" placeholder="City or job site, e.g. Hollywood" autocomplete="address-level2">
+            <div class="qq-msg">A city is enough to price the drive from our Broward yard.</div>
+          </div>
+          <div class="qq-field">
+            <label for="qq-reach">How high and how heavy? <span class="qq-opt">optional</span></label>
+            <input type="text" id="qq-reach" name="reach" placeholder="e.g. 600 lb, two stories, tight side yard">
+          </div>
+          <div class="qq-err" id="qqE2">Give us a city so we can price the drive.</div>
+          <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="button" class="btn qq-next">Next</button></div>
+        </div>
+
+        <div class="qq-step" data-step="3">
+          <div class="qq-field">
+            <label for="qq-name">Name or business</label>
+            <input type="text" id="qq-name" name="name" placeholder="Jane Contractor" autocomplete="name">
+          </div>
+          <div class="qq-field">
+            <label for="qq-phone">Phone</label>
+            <input type="tel" id="qq-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+          </div>
+          <div class="qq-field">
+            <label for="qq-email">Email <span class="qq-opt">optional</span></label>
+            <input type="email" id="qq-email" name="email" placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="qq-err" id="qqE3">We need a name and a number to call you back.</div>
+          <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="submit" class="btn">Send It</button></div>
+        </div>
+
+        <div class="qq-done" id="qqDone" role="status">
+          <b>Sent. Talk shortly.</b>
+          <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
+          <a href="tel:+19544456186" class="btn" data-call>Or call now: (954) 445-6186</a>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -973,6 +1081,66 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
   overlay.addEventListener('click', closeDrawer);
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
+  (function () {
+    const form = document.getElementById('qq');
+    if (!form) return;
+    const steps = [...form.querySelectorAll('.qq-step')];
+    const bars = [...form.querySelectorAll('.qq-bars i')];
+    const count = document.getElementById('qqCount');
+    const sel = document.getElementById('qqSel');
+    const selVal = document.getElementById('qqSelVal');
+    const done = document.getElementById('qqDone');
+    let cur = 0;
+    function picked() { const r = form.querySelector('input[name=load]:checked'); return r ? r.value : ''; }
+    function paintSel() { const v = picked(); if (v && cur > 0) { selVal.textContent = v; sel.classList.add('on'); } else sel.classList.remove('on'); }
+    function show(i) {
+      cur = i;
+      steps.forEach((s, n) => s.classList.toggle('on', n === i));
+      bars.forEach((b, n) => b.classList.toggle('on', n <= i));
+      if (count) count.textContent = 'Step ' + (i + 1) + ' / 3';
+      form.querySelectorAll('.qq-err').forEach(e => e.classList.remove('show'));
+      paintSel();
+    }
+    function valid(i) {
+      const err = document.getElementById('qqE' + (i + 1));
+      let ok = true;
+      if (i === 0) ok = !!picked();
+      if (i === 1) ok = form.where.value.trim().length > 1;
+      if (i === 2) ok = form.name.value.trim().length > 0 && form.phone.value.trim().length > 0;
+      if (!ok && err) err.classList.add('show');
+      return ok;
+    }
+    form.querySelectorAll('input[name=load]').forEach(r => r.addEventListener('change', () => {
+      document.getElementById('qqE1').classList.remove('show');
+      if (cur === 0) setTimeout(() => show(1), 140); else paintSel();
+    }));
+    document.getElementById('qqChange').addEventListener('click', () => show(0));
+    form.querySelectorAll('.qq-next').forEach(b => b.addEventListener('click', () => { if (valid(cur)) show(Math.min(cur + 1, steps.length - 1)); }));
+    form.querySelectorAll('.qq-back').forEach(b => b.addEventListener('click', () => show(Math.max(cur - 1, 0))));
+    form.querySelectorAll('input').forEach(el => el.addEventListener('input', () => { const e = document.getElementById('qqE' + (cur + 1)); if (e) e.classList.remove('show'); }));
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (form.company.value) return;
+      if (!valid(2)) return;
+      track('qualify_lead', { form_name: 'lift-ticket' });
+      const subject = encodeURIComponent('Lift quote request: ' + form.name.value.trim());
+      const body = encodeURIComponent('What needs lifting: ' + (picked() || '(not given)') +
+        '\nWhere: ' + form.where.value.trim() +
+        '\nHeight / weight: ' + (form.reach.value.trim() || '(not given)') +
+        '\n\nName/business: ' + form.name.value.trim() +
+        '\nPhone: ' + form.phone.value.trim() +
+        '\nEmail: ' + (form.email.value.trim() || '(not given)'));
+      window.location.href = 'mailto:Coopercranefl@gmail.com?subject=' + subject + '&body=' + body;
+      steps.forEach(s => s.classList.remove('on'));
+      sel.classList.remove('on');
+      done.classList.add('on');
+      if (count) count.textContent = 'Done';
+      bars.forEach(b => b.classList.add('on'));
+    });
+    const pre = form.getAttribute('data-preselect');
+    if (pre) { const hit = [...form.querySelectorAll('input[name=load]')].find(r => r.value === pre); if (hit) { hit.checked = true; show(1); } }
+  })();
+
   document.querySelectorAll('.acc-header').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.parentElement;
