@@ -244,10 +244,11 @@
 
   /* ===== SECTION SHELL ===== */
   section { padding: 100px 30px; }
-  @media (max-width: 768px) { section { padding: 48px 20px; } }
+  @media (max-width: 768px) { section { padding: 44px 20px; } }
   section.alt { background: var(--porcelain-alt); }
   section.dark { background: var(--navy); color: var(--bone); }
-  .eyebrow { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 8px; }
+  /* accent rule replaces the all-caps eyebrow label (P&C/Cross Designs house pattern) */
+  .rule { width: 46px; height: 4px; background: var(--red); border-radius: 2px; margin-bottom: 16px; }
   .headline { font-size: clamp(2.3rem, 4.8vw, 3.9rem); color: var(--ink); line-height: 0.98; }
   section.dark .headline { color: var(--bone); }
 
@@ -295,6 +296,23 @@
   .ledger-row .no { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--red); line-height: 1; padding-top: 2px; }
   .ledger-row h3 { font-size: 1.55rem; color: var(--ink); margin-bottom: 4px; }
   .ledger-row p { font-size: 0.98rem; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+
+  /* ===== FLOW: how a lift gets booked. spine, not numbered cards ===== */
+  .flow { background: var(--porcelain); }
+  .flow-inner { max-width: 1100px; margin: 0 auto; }
+  .flow-head { max-width: 640px; margin-bottom: 44px; }
+  .flow-head p { margin-top: 14px; font-size: 1.06rem; line-height: 1.6; color: var(--ink-soft); }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+  /* spine segments connect each step to the next, so nothing trails past the last one */
+  .step::after { content: ''; position: absolute; left: 26px; right: -34px; top: 11px; height: 2px; background: repeating-linear-gradient(90deg, rgba(23,32,47,0.22) 0 8px, transparent 8px 16px); }
+  .step:last-child::after { display: none; }
+  .step { position: relative; padding-top: 42px; }
+  .step::before { content: ''; position: absolute; top: 4px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--porcelain); }
+  .step b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.42rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.1; margin-bottom: 7px; }
+  .step span { font-size: 0.98rem; color: var(--ink-soft); line-height: 1.6; }
+  .flow-foot { margin-top: 40px; padding: 24px 28px; background: var(--navy); color: var(--bone); border-left: 6px solid var(--red); border-radius: 3px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; }
+  .flow-foot p { margin: 0; font-size: 1.02rem; line-height: 1.55; color: var(--bone-mute); max-width: 640px; }
+  .flow-foot p strong { color: var(--bone); font-weight: 600; }
 
   /* ===== FULL-BLEED PHOTO BREAK (container break) ===== */
   .bleed { padding: 0; background: var(--navy); }
@@ -371,6 +389,7 @@
   .proof-foot { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 0.95rem; color: var(--bone-mute); }
   .proof-foot a { color: var(--bone); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .proof-foot a:hover { color: #fff; }
+  .rev-dots { display: none; }
 
   /* ===== FAQ ===== */
   .faq { background: var(--porcelain); }
@@ -425,7 +444,13 @@
 
   /* ===== FOOTER ===== */
   footer { background: var(--navy-deep); color: var(--bone-mute); padding: 62px 30px 26px; }
-  .footer-inner { max-width: 1200px; margin: 0 auto 34px; display: grid; grid-template-columns: 2fr 1fr 1fr 1.3fr; gap: 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto 34px; display: grid; grid-template-columns: 1.75fr 1fr 1fr 1fr; gap: 40px; }
+  /* contact lives inside the brand column (house shape), not as a 4th column */
+  .footer-brand address { font-style: normal; display: flex; flex-direction: column; gap: 7px; margin: 16px 0 14px; font-size: 0.94rem; }
+  .footer-brand address a { color: var(--bone); text-decoration: none; font-weight: 600; }
+  .footer-brand address a:hover { color: #fff; }
+  .footer-brand address .big { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.55rem; letter-spacing: 0.02em; line-height: 1; }
+  .footer-brand address span { color: var(--bone-mute); }
   .footer-brand .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.7rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; }
   .footer-brand .wm .star { margin-right: 7px; }
   .footer-brand .tag { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bone-mute); margin: 5px 0 16px; font-weight: 600; }
@@ -449,6 +474,11 @@
   @media (max-width: 1024px) {
     .lift-inner { grid-template-columns: 1fr; gap: 34px; }
     .lift-intro { position: static; }
+    .steps { grid-template-columns: 1fr; gap: 0; }
+    .step { padding: 0 0 26px 34px; }
+    .step:last-child { padding-bottom: 0; }
+    .step::before { top: 3px; width: 14px; height: 14px; }
+    .step::after { left: 6px; right: auto; top: 22px; bottom: 4px; width: 2px; height: auto; background: repeating-linear-gradient(180deg, rgba(23,32,47,0.22) 0 8px, transparent 8px 16px); }
     .why-inner { grid-template-columns: 1fr; gap: 30px; }
     .why-photo { aspect-ratio: 16/10; max-height: 380px; }
     .proof-grid { grid-template-columns: 1fr; }
@@ -491,7 +521,7 @@
     .fleet-foot { padding: 20px; }
     .fleet-foot .btn { width: 100%; }
 
-    .ledger-row { grid-template-columns: 40px 1fr; gap: 12px; padding: 14px 2px; }
+    .ledger-row { grid-template-columns: 36px 1fr; gap: 10px; padding: 12px 2px; }
     .ledger-row .no { font-size: 1.5rem; }
     .ledger-row h3 { font-size: 1.3rem; }
     .ledger-row p { font-size: 0.92rem; }
@@ -513,10 +543,23 @@
     .area-contact { padding: 28px 24px; }
     .area-contact .btn { width: 100%; align-self: stretch; }
 
-    .proof-head { margin-bottom: 26px; }
-    .quote-feature { padding: 26px 24px; }
+    .proof-head { margin-bottom: 20px; }
+    .quote-feature { padding: 24px 22px; }
     .quote-feature blockquote { font-size: 1.06rem; }
-    .quote-side { flex-direction: column; }
+
+    /* reviews become a swipeable carousel on mobile (P&C car-track pattern) */
+    .proof-grid {
+      display: flex; grid-template-columns: none; gap: 12px;
+      overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; margin: 0 -20px; padding: 2px 20px 4px; scroll-padding-left: 20px;
+    }
+    .proof-grid::-webkit-scrollbar { display: none; }
+    .quote-side { display: contents; }
+    .quote-feature, .quote-card { flex: 0 0 84%; scroll-snap-align: start; }
+    .quote-feature blockquote, .quote-card blockquote { flex: 0 1 auto; }
+    .rev-dots { display: flex; gap: 7px; justify-content: center; margin-top: 18px; }
+    .rev-dots span { width: 7px; height: 7px; border-radius: 50%; background: rgba(244,243,238,0.28); transition: background 0.25s ease, width 0.25s ease; }
+    .rev-dots span.on { background: var(--red); width: 22px; border-radius: 4px; }
 
     .faq-intro p, .faq-intro .btn { display: none; }
     .faq-intro .headline { margin-bottom: 0; }
@@ -535,10 +578,16 @@
     .contact-side { gap: 12px; }
     .yard-tile { padding: 22px 20px; }
 
+    .flow-head { margin-bottom: 28px; }
+    .flow-foot { margin-top: 26px; padding: 20px; }
+    .flow-foot .btn { width: 100%; }
+
     footer { padding: 42px 20px 22px; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 24px 20px; margin-bottom: 22px; }
     .footer-brand { grid-column: 1 / -1; }
-    .footer-contact { grid-column: 1 / -1; }
+    /* longest column ordered last so the two short ones pair up (P&C foot-col-fix) */
+    .footer-col.wide { grid-column: 1 / -1; }
+    .footer-col.wide ul { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 18px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
 
@@ -635,7 +684,7 @@
 <!-- ===== FLEET BOARD (signature) ===== -->
 <section class="fleet" id="fleet">
   <div class="fleet-head">
-    <span class="eyebrow">The Fleet</span>
+    <div class="rule" aria-hidden="true"></div>
     <h2 class="headline">Four Machines, 2 to 40 Tons</h2>
     <p>Each plate below is scaled to its machine's rated capacity. Pick the size your job needs; every one of them rolls out of our Broward yard with an operator in the seat.</p>
   </div>
@@ -688,6 +737,35 @@
   </div>
 </section>
 
+<!-- ===== FLOW: booking a lift ===== -->
+<section class="flow" id="how">
+  <div class="flow-inner">
+    <div class="flow-head">
+      <div class="rule" aria-hidden="true"></div>
+      <h2 class="headline">Booking a Crane Is a Three-Minute Phone Call</h2>
+      <p>No account to open, no site visit before you get a number. Most quotes happen on the first call.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <b>You tell us the load</b>
+        <span>Weight, how high it goes, how far the crane has to reach, and anything tight about the access. Photos help.</span>
+      </div>
+      <div class="step">
+        <b>We spec the machine</b>
+        <span>We pick the smallest crane that safely does your lift, so you are not paying 40 tons of capacity for a 2-ton job.</span>
+      </div>
+      <div class="step">
+        <b>We show up and lift it</b>
+        <span>Certified operator, rigging and signaling handled. You point at what needs to move.</span>
+      </div>
+    </div>
+    <div class="flow-foot">
+      <p><strong>What moves the price:</strong> the machine your load requires, how long we are on site, and the drive from our Broward yard. Ask and we will tell you before anyone books anything.</p>
+      <a href="#contact" class="btn">Get My Number</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FULL-BLEED PHOTO BREAK ===== -->
 <section class="bleed" aria-label="Featured lift photo">
   <figure>
@@ -718,8 +796,8 @@
 <!-- ===== RECENT WORK ===== -->
 <section class="recent" id="work">
   <div class="recent-head">
-    <h2 class="headline">Recent Lifts</h2>
-    <p>Real jobs, real iron. From tight indoor installs to oceanfront rooftops, this is the fleet at work.</p>
+    <h2 class="headline">Every Photo Here Is Our Own Iron</h2>
+    <p>No stock trucks, no borrowed job sites. Tight indoor installs to oceanfront rooftops, all Cooper Crane machines on real South Florida jobs.</p>
   </div>
   <div class="gallery">
     <figure class="gphoto wide"><img src="assets/fleet-lineup.jpg" alt="The Cooper Crane fleet of red and white boom trucks lined up in the Broward yard" loading="lazy"><figcaption>The fleet, lined up at the yard</figcaption></figure>
@@ -752,7 +830,7 @@
 <section class="proof dark" id="proof">
   <div class="proof-inner">
     <div class="proof-head">
-      <span class="eyebrow" style="color:#E8AEB6;">Proof</span>
+      <div class="rule" aria-hidden="true"></div>
       <h2 class="headline">Ten Years of Repeat Business Says It Better Than We Can</h2>
     </div>
     <div class="proof-grid">
@@ -774,6 +852,7 @@
         </article>
       </div>
     </div>
+    <div class="rev-dots" id="revDots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
     <p class="proof-foot">Pulled word for word from our 20 Google reviews. <a href="https://www.google.com/maps?cid=972231914882425130" target="_blank" rel="noopener">Read all of them on Google</a></p>
   </div>
 </section>
@@ -854,6 +933,11 @@
       <span class="wm"><span class="star" aria-hidden="true">&#9733;</span>Cooper Crane</span>
       <p class="tag">Southeast Florida Crane Service</p>
       <p>Certified-operator crane and boom truck service across Palm Beach, Broward and Miami-Dade, from a 2-ton mini spider crane to a 40-ton mobile crane.</p>
+      <address>
+        <a href="tel:+19544456186" class="big" data-call>(954) 445-6186</a>
+        <a href="mailto:Coopercranefl@gmail.com">Coopercranefl@gmail.com</a>
+        <span>West Park, FL. Serving the Atlantic coast, West Palm Beach to South Miami.</span>
+      </address>
       <div class="footer-social"><a href="https://www.facebook.com/CooperCraneFL" target="_blank" rel="noopener">Facebook</a></div>
     </div>
     <div class="footer-col">
@@ -861,6 +945,7 @@
       <ul>
         <li><a href="#fleet">The Fleet</a></li>
         <li><a href="#lift">What We Lift</a></li>
+        <li><a href="#how">How Booking Works</a></li>
         <li><a href="#why">Why Cooper</a></li>
         <li><a href="#work">Recent Lifts</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -872,16 +957,21 @@
         <li><a href="#area">Palm Beach County</a></li>
         <li><a href="#area">Broward County</a></li>
         <li><a href="#area">Miami-Dade County</a></li>
-        <li><a href="#contact">Get a Lift Quote</a></li>
+        <li><a href="#area">West Palm Beach</a></li>
+        <li><a href="#area">Fort Lauderdale</a></li>
+        <li><a href="#area">Miami</a></li>
       </ul>
     </div>
-    <div class="footer-col footer-contact">
-      <h4>The Yard</h4>
-      <address>
-        <a href="tel:+19544456186" data-call>(954) 445-6186</a>
-        <a href="mailto:Coopercranefl@gmail.com">Coopercranefl@gmail.com</a>
-        <span>West Park, Broward County, FL</span>
-      </address>
+    <div class="footer-col wide">
+      <h4>What We Lift</h4>
+      <ul>
+        <li><a href="#lift">Rooftop AC Units</a></li>
+        <li><a href="#lift">Roof &amp; Floor Trusses</a></li>
+        <li><a href="#lift">Roofing Material</a></li>
+        <li><a href="#lift">Generators</a></li>
+        <li><a href="#lift">Pest-Control Tarps</a></li>
+        <li><a href="#fleet">Spider Crane Work</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
@@ -945,6 +1035,30 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
       if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
     });
   });
+
+  // ===== Review carousel dots (mobile only; desktop keeps the featured layout) =====
+  (function () {
+    const track = document.querySelector('.proof-grid');
+    const dots = document.getElementById('revDots');
+    if (!track || !dots) return;
+    const slides = () => [...track.querySelectorAll('.quote-feature, .quote-card')];
+    let raf = null;
+    function sync() {
+      raf = null;
+      if (getComputedStyle(track).overflowX !== 'auto') return;
+      const mid = track.scrollLeft + track.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      slides().forEach((s, i) => {
+        const c = s.offsetLeft + s.offsetWidth / 2;
+        const d = Math.abs(c - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      [...dots.children].forEach((d, i) => d.classList.toggle('on', i === best));
+    }
+    track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  })();
 
   // ===== Quote form: novalidate + JS validation + mailto handoff =====
   const form = document.getElementById('quoteForm');
