@@ -2,10 +2,27 @@
   publish = "."
   command = ""
 
+# images are replaced by name only on a rebrand, so a long cache is fine
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/*.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# the shared stylesheet and script DO change in place: always revalidate
+[[headers]]
+  for = "/assets/site.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/site.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.html"
