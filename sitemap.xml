@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://crossfiber.github.io/cooper-crane-2/</loc><priority>1.0</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/</loc><lastmod>2026-08-10</lastmod><priority>1.0</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/ac-unit-lifts/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/pest-control-tarp-lifts/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/truss-setting/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/roofing-material-lifts/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/generator-lifts/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://crossfiber.github.io/cooper-crane-2/services/spider-crane-tight-access/</loc><lastmod>2026-08-10</lastmod><priority>0.8</priority></url>
 </urlset>
