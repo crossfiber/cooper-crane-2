@@ -223,8 +223,8 @@
   .hero-bg { position: absolute; inset: 0; background-image: url('assets/hero-fleet.jpg'); background-size: cover; background-position: center 42%; z-index: 0; }
   .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(96deg, rgba(13,21,36,0.96) 0%, rgba(13,21,36,0.86) 40%, rgba(16,25,43,0.52) 72%, rgba(16,25,43,0.3) 100%), linear-gradient(0deg, rgba(13,21,36,0.94) 0%, rgba(13,21,36,0) 46%);
   }
-  .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
-  .hero-content { max-width: 700px; padding-bottom: 58px; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 54px; align-items: center; padding-bottom: 54px; }
+  .hero-content { max-width: 640px; }
   .hero-chip { display: inline-flex; align-items: center; gap: 9px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.98rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bone); border: 1px solid rgba(244,243,238,0.35); border-radius: 2px; padding: 7px 14px; margin-bottom: 22px; }
   .hero h1 { font-size: clamp(3.4rem, 8vw, 6.6rem); font-weight: 800; color: var(--bone); margin-bottom: 18px; line-height: 0.94; }
   .hero h1 .h1-sub { display: block; font-size: clamp(1.15rem, 2.2vw, 1.7rem); font-weight: 700; letter-spacing: 0.09em; color: #E8AEB6; margin-top: 12px; line-height: 1.15; }
@@ -232,6 +232,42 @@
   .hero p.lede strong { color: var(--bone); font-weight: 600; }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .hero-ctas .btn { padding: 17px 30px; font-size: 1.24rem; }
+
+  /* ===== QUICK QUOTE (3-step, P&C qq pattern re-skinned) ===== */
+  .qq { background: #fff; border-radius: 6px; box-shadow: var(--shadow-md); padding: 26px 26px 22px; border-top: 5px solid var(--red); }
+  .qq-head b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.62rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.05; }
+  .qq-head span { font-size: 0.92rem; color: var(--ink-soft); display: block; margin-top: 4px; }
+  .qq-prog { display: flex; gap: 6px; margin: 16px 0 18px; }
+  .qq-prog i { flex: 1; height: 4px; border-radius: 2px; background: rgba(23,32,47,0.14); transition: background 0.25s ease; }
+  .qq-prog i.on { background: var(--red); }
+  .qq-step { display: none; }
+  .qq-step.on { display: block; }
+  .qq-tiles { display: flex; flex-direction: column; gap: 8px; }
+  .qq-tile { display: block; position: relative; cursor: pointer; }
+  .qq-tile input { position: absolute; opacity: 0; pointer-events: none; }
+  .qq-tile span { display: block; border: 1.5px solid rgba(23,32,47,0.16); border-radius: 4px; padding: 11px 14px; transition: border-color 0.18s ease, background 0.18s ease; }
+  .qq-tile b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.15; }
+  .qq-tile em { font-style: normal; font-size: 0.85rem; color: var(--ink-soft); display: block; margin-top: 1px; }
+  .qq-tile:hover span { border-color: rgba(178,35,53,0.5); }
+  .qq-tile input:checked + span { border-color: var(--red); background: rgba(178,35,53,0.06); box-shadow: inset 3px 0 0 var(--red); }
+  .qq-tile input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
+  .qq-field { display: flex; flex-direction: column; margin-bottom: 12px; }
+  .qq-field label { font-size: 0.78rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+  .qq-opt { font-weight: 500; color: var(--ink-soft); text-transform: none; letter-spacing: 0; }
+  .qq-field input { padding: 11px 13px; background: var(--porcelain); border: 1.5px solid rgba(23,32,47,0.18); border-radius: 3px; color: var(--ink); font-family: 'Public Sans', sans-serif; font-size: 0.96rem; }
+  .qq-field input:focus { outline: none; border-color: var(--red); background: #fff; box-shadow: 0 0 0 3px rgba(178,35,53,0.12); }
+  .qq-msg { font-size: 0.8rem; color: var(--ink-soft); margin-top: 5px; }
+  .qq-err { display: none; font-size: 0.82rem; font-weight: 600; color: var(--red-hot); margin-top: 9px; }
+  .qq-err.show { display: block; }
+  .qq-nav { display: flex; gap: 9px; margin-top: 16px; }
+  .qq-nav .btn { flex: 1; padding: 13px 18px; font-size: 1.08rem; }
+  .qq-back { flex: 0 0 auto !important; background: transparent; color: var(--ink) !important; border: 1.5px solid rgba(23,32,47,0.22); box-shadow: none; padding: 13px 18px; border-radius: 2px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.08rem; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
+  .qq-back:hover { background: rgba(23,32,47,0.05); }
+  .qq-hp { position: absolute; left: -9999px; }
+  .qq-done { display: none; text-align: center; padding: 12px 4px 6px; }
+  .qq-done.on { display: block; }
+  .qq-done b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 6px; }
+  .qq-done p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 14px; }
 
   /* thin flag-stripe seam, the single stripe motif on the page */
   .hero-stripe { position: relative; z-index: 2; height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 72px, var(--bone) 72px 144px); opacity: 0.92; }
@@ -282,20 +318,31 @@
   .fleet-foot p { margin: 0; font-size: 1.02rem; color: var(--ink-soft); max-width: 600px; line-height: 1.55; }
   .fleet-foot p strong { color: var(--ink); font-weight: 600; }
 
-  /* ===== WHAT WE LIFT: editorial ledger, no icon cards ===== */
+  /* ===== WHAT WE LIFT: alternating zigzag, no icon cards ===== */
   .lift { background: var(--porcelain-alt); }
-  .lift-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  .lift-intro { position: sticky; top: calc(var(--nav-h) + 32px); }
+  .lift-inner { max-width: 1180px; margin: 0 auto; }
+  .lift-intro { max-width: 720px; margin-bottom: 40px; }
   .lift-intro .headline { margin-bottom: 18px; }
   .lift-intro p { color: var(--ink-soft); font-size: 1.06rem; line-height: 1.65; margin-bottom: 12px; }
   .lift-intro p strong { color: var(--ink); font-weight: 600; }
   .lift-intro .btn { margin-top: 14px; }
-  .ledger { display: flex; flex-direction: column; }
-  .ledger-row { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 24px 4px; border-top: 1px solid rgba(23,32,47,0.18); align-items: start; }
-  .ledger-row:last-child { border-bottom: 1px solid rgba(23,32,47,0.18); }
-  .ledger-row .no { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--red); line-height: 1; padding-top: 2px; }
-  .ledger-row h3 { font-size: 1.55rem; color: var(--ink); margin-bottom: 4px; }
-  .ledger-row p { font-size: 0.98rem; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+  /* zigzag: photo and text swap sides row to row */
+  .zz { display: flex; flex-direction: column; gap: 18px; }
+  .zz-row { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 30px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .zz-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .zz-row:nth-child(even) .zz-media { order: 2; }
+  .zz-media { aspect-ratio: 4 / 3; background: var(--navy); overflow: hidden; }
+  .zz-media img { width: 100%; height: 100%; object-fit: cover; }
+  .zz-text { padding: 26px 30px 26px 4px; display: flex; flex-direction: column; }
+  .zz-row:nth-child(even) .zz-text { padding: 26px 4px 26px 30px; }
+  .zz-no { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--red); letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
+  .zz-text h3 { font-size: 1.7rem; color: var(--ink); margin-bottom: 7px; line-height: 1.05; }
+  .zz-text p { font-size: 0.99rem; color: var(--ink-soft); line-height: 1.58; margin-bottom: 14px; }
+  .zz-short { display: none; }
+  .zz-link { margin-top: auto; align-self: flex-start; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.06rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); text-decoration: none; }
+  .zz-link:hover { color: var(--red-hot); }
+  .zz-link i { font-style: normal; transition: transform 0.2s ease; }
+  .zz-link:hover i { transform: translateX(4px); }
 
   /* ===== FLOW: how a lift gets booked. spine, not numbered cards ===== */
   .flow { background: var(--porcelain); }
@@ -375,16 +422,17 @@
   .proof-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 18px; align-items: stretch; }
   .quote-feature { background: var(--navy-2); border: 1px solid var(--line-dark); border-left: 6px solid var(--red); border-radius: 4px; padding: 40px 42px; display: flex; flex-direction: column; }
   .quote-feature .stars { color: var(--red); font-size: 1rem; letter-spacing: 3px; margin-bottom: 18px; }
-  .quote-feature blockquote { font-size: 1.28rem; line-height: 1.55; color: var(--bone); font-weight: 400; flex: 1; }
+  .quote-feature blockquote { font-size: 1.18rem; line-height: 1.6; color: var(--bone); font-weight: 400; flex: 1 1 auto; }
   .quote-feature blockquote strong { color: #fff; font-weight: 600; }
-  .q-who { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line-dark); }
+  /* attribution always pinned to the bottom edge of every card, no dead space */
+  .q-who { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line-dark); }
   .q-who b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bone); display: block; line-height: 1.15; }
   .q-who span { font-size: 0.84rem; color: var(--bone-mute); }
   .quote-side { display: flex; flex-direction: column; gap: 18px; }
   .quote-card { background: var(--navy-2); border: 1px solid var(--line-dark); border-radius: 4px; padding: 24px 26px; flex: 1; display: flex; flex-direction: column; }
   .quote-card .stars { color: var(--red); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 12px; }
   .quote-card blockquote { font-size: 0.98rem; line-height: 1.55; color: var(--bone); flex: 1; }
-  .quote-card .q-who { margin-top: 14px; padding-top: 12px; }
+  .quote-card .q-who { margin-top: auto; padding-top: 14px; }
   .quote-card .q-who b { font-size: 1.05rem; }
   .proof-foot { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 0.95rem; color: var(--bone-mute); }
   .proof-foot a { color: var(--bone); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
@@ -472,8 +520,7 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
-    .lift-inner { grid-template-columns: 1fr; gap: 34px; }
-    .lift-intro { position: static; }
+    .lift-intro { margin-bottom: 26px; }
     .steps { grid-template-columns: 1fr; gap: 0; }
     .step { padding: 0 0 26px 34px; }
     .step:last-child { padding-bottom: 0; }
@@ -502,8 +549,12 @@
     .hero-chip { font-size: 0.82rem; padding: 6px 11px; margin-bottom: 16px; }
     .hero h1 { font-size: 3rem; }
     .hero p.lede { font-size: 1.02rem; margin-bottom: 24px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
     .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .hero-ctas .btn { width: 100%; padding: 15px 18px; font-size: 1.15rem; }
+    .qq { padding: 20px 18px 18px; }
+    .qq-head b { font-size: 1.42rem; }
+    .qq-nav .btn { font-size: 1.02rem; padding: 13px 14px; }
     .cred-rail-inner { flex-direction: column; gap: 0; padding: 6px 0 8px; }
     .cred { padding: 7px 0; border-bottom: 1px solid rgba(244,243,238,0.08); }
     .cred:last-child { border-bottom: none; }
@@ -521,10 +572,19 @@
     .fleet-foot { padding: 20px; }
     .fleet-foot .btn { width: 100%; }
 
-    .ledger-row { grid-template-columns: 36px 1fr; gap: 10px; padding: 12px 2px; }
-    .ledger-row .no { font-size: 1.5rem; }
-    .ledger-row h3 { font-size: 1.3rem; }
-    .ledger-row p { font-size: 0.92rem; }
+    /* zigzag becomes a 2-up tap grid on mobile: never 1-up, keeps the section short */
+    .zz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .zz-row { grid-template-columns: 1fr; gap: 0; }
+    .zz-row:nth-child(even) .zz-media { order: 0; }
+    .zz-media { aspect-ratio: 16 / 10; }
+    .zz-row { height: 100%; display: flex; flex-direction: column; }
+    .zz-text, .zz-row:nth-child(even) .zz-text { padding: 12px 13px 14px; flex: 1; }
+    .zz-no { font-size: 0.8rem; margin-bottom: 3px; }
+    .zz-text h3 { font-size: 1.06rem; margin-bottom: 0; line-height: 1.1; }
+    .zz-text p { display: none; }
+    .zz-link { font-size: 0.88rem; padding-top: 9px; }
+    .zz-full { display: none; }
+    .zz-short { display: inline; }
 
     .bleed img { height: 300px; }
     .bleed figcaption { padding: 50px 20px 18px; }
@@ -667,9 +727,66 @@
       <p class="lede">AC units, roof trusses, generators, hot tubs: whatever your job needs in the air. <strong>A certified Cooper Crane operator runs every lift</strong>, from a 2-ton spider crane that fits through a gate to a 40-ton mobile crane.</p>
       <div class="hero-ctas">
         <a href="tel:+19544456186" class="btn" data-call>Call (954) 445-6186</a>
-        <a href="#contact" class="btn btn-ghost">Get a Lift Quote</a>
       </div>
     </div>
+
+    <!-- 3-step quick quote: sits between the call CTA and the credentials rail -->
+    <form class="qq" id="qq" novalidate>
+      <p class="qq-hp"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
+      <div class="qq-head">
+        <b>Price my lift</b>
+        <span>Three quick questions. We call you back with a number.</span>
+      </div>
+      <div class="qq-prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+
+      <div class="qq-step on" data-step="1">
+        <div class="qq-tiles" role="radiogroup" aria-label="What needs lifting">
+          <label class="qq-tile"><input type="radio" name="load" value="Rooftop AC unit"><span><b>Rooftop AC unit</b><em>Condenser or air handler onto a curb</em></span></label>
+          <label class="qq-tile"><input type="radio" name="load" value="Trusses or roofing material"><span><b>Trusses or roofing</b><em>Truss packages, tile, shingle bundles</em></span></label>
+          <label class="qq-tile"><input type="radio" name="load" value="Generator"><span><b>Generator</b><em>Standby set onto a pad or roof</em></span></label>
+          <label class="qq-tile"><input type="radio" name="load" value="Something else"><span><b>Something else</b><em>Tarps, steel, trees, hot tubs, not sure</em></span></label>
+        </div>
+        <div class="qq-err" id="qqE1">Tap the closest one. We sort the details on the call.</div>
+        <div class="qq-nav"><button type="button" class="btn qq-next">Next</button></div>
+      </div>
+
+      <div class="qq-step" data-step="2">
+        <div class="qq-field">
+          <label for="qq-where">Where is the job?</label>
+          <input type="text" id="qq-where" name="where" placeholder="City or job site, e.g. Hollywood" autocomplete="address-level2">
+          <div class="qq-msg">A city is enough to price the drive from our Broward yard.</div>
+        </div>
+        <div class="qq-field">
+          <label for="qq-reach">How high and how heavy? <span class="qq-opt">optional</span></label>
+          <input type="text" id="qq-reach" name="reach" placeholder="e.g. 600 lb, two stories, tight side yard">
+        </div>
+        <div class="qq-err" id="qqE2">Give us a city so we can price the drive.</div>
+        <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="button" class="btn qq-next">Next</button></div>
+      </div>
+
+      <div class="qq-step" data-step="3">
+        <div class="qq-field">
+          <label for="qq-name">Name or business</label>
+          <input type="text" id="qq-name" name="name" placeholder="Jane Contractor" autocomplete="name">
+        </div>
+        <div class="qq-field">
+          <label for="qq-phone">Phone</label>
+          <input type="tel" id="qq-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+        </div>
+        <div class="qq-field">
+          <label for="qq-email">Email <span class="qq-opt">optional</span></label>
+          <input type="email" id="qq-email" name="email" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="qq-err" id="qqE3">We need a name and a number to call you back.</div>
+        <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="submit" class="btn">Send It</button></div>
+      </div>
+
+      <div class="qq-done" id="qqDone" role="status">
+        <b>Sent. Talk shortly.</b>
+        <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
+        <a href="tel:+19544456186" class="btn" data-call>Or call now: (954) 445-6186</a>
+      </div>
+    </form>
   </div>
   <div class="hero-stripe" aria-hidden="true"></div>
   <div class="cred-rail">
@@ -722,17 +839,65 @@
   <div class="lift-inner">
     <div class="lift-intro">
       <h2 class="headline">If It Needs to Go Up, Over or Down, You Call Us</h2>
-      <p>These are the lifts Southeast Florida calls us for most. If yours is not on the list, that changes nothing: <strong>if you can rig it, we can lift it.</strong></p>
-      <p>Heavy, awkward, over a roofline or through an atrium door. That is the job.</p>
+      <p>These are the lifts Southeast Florida calls us for most. Tap any one for how it actually runs: what we need from you, what the crane has to reach, and what slows a job down.</p>
+      <p>If yours is not on the list, that changes nothing. <strong>If you can rig it, we can lift it.</strong></p>
       <a href="#contact" class="btn">Tell Us Your Lift</a>
     </div>
-    <div class="ledger">
-      <div class="ledger-row"><span class="no">01</span><div><h3>AC Units</h3><p>Rooftop condensers and air handlers set clean on the curb, single homes to high-rises.</p></div></div>
-      <div class="ledger-row"><span class="no">02</span><div><h3>Pest-Control Tarps</h3><p>Fumigation tenting lifted up and over the roofline so tarp crews work fast and safe.</p></div></div>
-      <div class="ledger-row"><span class="no">03</span><div><h3>Trusses</h3><p>Roof and floor trusses flown to your framing crew on schedule.</p></div></div>
-      <div class="ledger-row"><span class="no">04</span><div><h3>Roofing</h3><p>Tile and shingle bundles hoisted straight to the deck, not up a ladder.</p></div></div>
-      <div class="ledger-row"><span class="no">05</span><div><h3>Generators</h3><p>Standby sets onto pads and rooftops without the wrestling match.</p></div></div>
-      <div class="ledger-row"><span class="no">06</span><div><h3>The Odd Ones</h3><p>Trees, steel, signage, hot tubs, equipment swaps. Rig it, and we lift it.</p></div></div>
+    <div class="zz">
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/cc-rooftop-lift.jpg" alt="Cooper Crane boom truck setting a rooftop AC unit on a South Florida building" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">01</span>
+          <h3>AC Units</h3>
+          <p>Rooftop condensers and air handlers set clean on the curb, single homes to high-rises.</p>
+          <a class="zz-link" href="services/ac-unit-lifts/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/work-residential.jpg" alt="Cooper Crane boom truck working over a South Florida residential roofline" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">02</span>
+          <h3>Pest-Control Tarps</h3>
+          <p>Fumigation tenting lifted up and over the roofline so tarp crews work fast and safe.</p>
+          <a class="zz-link" href="services/pest-control-tarp-lifts/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/work-boom-yard.jpg" alt="Cooper Crane boom truck staged with the boom extended for a truss set" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">03</span>
+          <h3>Trusses</h3>
+          <p>Roof and floor trusses flown to your framing crew on schedule, not stacked in the yard.</p>
+          <a class="zz-link" href="services/truss-setting/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/cc-boom-truck.jpg" alt="A branded Cooper Crane Peterbilt boom truck on a Southeast Florida job site" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">04</span>
+          <h3>Roofing Material</h3>
+          <p>Tile and shingle bundles hoisted straight to the deck, not carried up a ladder.</p>
+          <a class="zz-link" href="services/roofing-material-lifts/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/work-generator.jpg" alt="Cooper Crane boom truck setting a large industrial generator in Southeast Florida" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">05</span>
+          <h3>Generators</h3>
+          <p>Standby sets onto pads and rooftops without the wrestling match.</p>
+          <a class="zz-link" href="services/generator-lifts/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
+      <article class="zz-row">
+        <div class="zz-media"><img src="assets/cc-spider-indoor.jpg" alt="Cooper Crane mini spider crane working an indoor glass installation inside a Florida atrium" loading="lazy"></div>
+        <div class="zz-text">
+          <span class="zz-no">06</span>
+          <h3>Spider Crane &amp; Odd Jobs</h3>
+          <p>Trees, steel, signage, hot tubs, indoor glass. If you can rig it, we can lift it.</p>
+          <a class="zz-link" href="services/spider-crane-tight-access/"><span class="zz-full">See how we do it</span><span class="zz-short">Details</span> <i aria-hidden="true">&rarr;</i></a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -836,7 +1001,7 @@
     <div class="proof-grid">
       <article class="quote-feature">
         <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <blockquote>Best crane service company in Florida! I've been using Cooper Crane services for <strong>over 10+ years</strong> and all my jobs have gone flawless with them! Service is professional, excellent people to work with like <strong>Shannon from the office and Mika the crane operator</strong>, you can't go wrong! A strong recommendation to get the job done professionally.</blockquote>
+        <blockquote>Best crane service company in Florida! I've been using Cooper Crane services for <strong>over 10+ years</strong> and all my jobs have gone flawless with them! Excellent people to work with like <strong>Shannon from the office and Mika the crane operator</strong>. You can't go wrong.</blockquote>
         <div class="q-who"><b>Infinite Refrigeration LLC</b><span>Google review &middot; repeat commercial customer</span></div>
       </article>
       <div class="quote-side">
@@ -965,12 +1130,12 @@
     <div class="footer-col wide">
       <h4>What We Lift</h4>
       <ul>
-        <li><a href="#lift">Rooftop AC Units</a></li>
-        <li><a href="#lift">Roof &amp; Floor Trusses</a></li>
-        <li><a href="#lift">Roofing Material</a></li>
-        <li><a href="#lift">Generators</a></li>
-        <li><a href="#lift">Pest-Control Tarps</a></li>
-        <li><a href="#fleet">Spider Crane Work</a></li>
+        <li><a href="services/ac-unit-lifts/">Rooftop AC Units</a></li>
+        <li><a href="services/truss-setting/">Roof &amp; Floor Trusses</a></li>
+        <li><a href="services/roofing-material-lifts/">Roofing Material</a></li>
+        <li><a href="services/generator-lifts/">Generators</a></li>
+        <li><a href="services/pest-control-tarp-lifts/">Pest-Control Tarps</a></li>
+        <li><a href="services/spider-crane-tight-access/">Spider Crane &amp; Tight Access</a></li>
       </ul>
     </div>
   </div>
@@ -1035,6 +1200,60 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
       if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
     });
   });
+
+  // ===== Quick quote: 3 steps, validate per step, mailto handoff =====
+  (function () {
+    const form = document.getElementById('qq');
+    if (!form) return;
+    const steps = [...form.querySelectorAll('.qq-step')];
+    const dots = [...form.querySelectorAll('.qq-prog i')];
+    const done = document.getElementById('qqDone');
+    let cur = 0;
+    function show(i) {
+      cur = i;
+      steps.forEach((s, n) => s.classList.toggle('on', n === i));
+      dots.forEach((d, n) => d.classList.toggle('on', n <= i));
+      form.querySelectorAll('.qq-err').forEach(e => e.classList.remove('show'));
+    }
+    function valid(i) {
+      const err = document.getElementById('qqE' + (i + 1));
+      let ok = true;
+      if (i === 0) ok = !!form.querySelector('input[name=load]:checked');
+      if (i === 1) ok = form.where.value.trim().length > 1;
+      if (i === 2) ok = form.name.value.trim().length > 0 && form.phone.value.trim().length > 0;
+      if (!ok && err) err.classList.add('show');
+      return ok;
+    }
+    form.querySelectorAll('.qq-next').forEach(b => b.addEventListener('click', () => {
+      if (valid(cur)) show(Math.min(cur + 1, steps.length - 1));
+    }));
+    form.querySelectorAll('.qq-back').forEach(b => b.addEventListener('click', () => show(Math.max(cur - 1, 0))));
+    form.querySelectorAll('input[name=load]').forEach(r => r.addEventListener('change', () => {
+      document.getElementById('qqE1').classList.remove('show');
+    }));
+    form.querySelectorAll('input').forEach(el => el.addEventListener('input', () => {
+      const e = document.getElementById('qqE' + (cur + 1)); if (e) e.classList.remove('show');
+    }));
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (form.company.value) return;            // honeypot
+      if (!valid(2)) return;
+      track('qualify_lead', { form_name: 'quick-quote' });
+      const load = (form.querySelector('input[name=load]:checked') || {}).value || '(not given)';
+      const subject = encodeURIComponent('Lift quote request: ' + form.name.value.trim());
+      const body = encodeURIComponent(
+        'What needs lifting: ' + load +
+        '\nWhere: ' + form.where.value.trim() +
+        '\nHeight / weight: ' + (form.reach.value.trim() || '(not given)') +
+        '\n\nName/business: ' + form.name.value.trim() +
+        '\nPhone: ' + form.phone.value.trim() +
+        '\nEmail: ' + (form.email.value.trim() || '(not given)'));
+      window.location.href = 'mailto:Coopercranefl@gmail.com?subject=' + subject + '&body=' + body;
+      steps.forEach(s => s.classList.remove('on'));
+      form.querySelector('.qq-prog').style.display = 'none';
+      done.classList.add('on');
+    });
+  })();
 
   // ===== Review carousel dots (mobile only; desktop keeps the featured layout) =====
   (function () {
