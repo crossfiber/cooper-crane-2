@@ -177,7 +177,7 @@
   .nav-inner { width: 100%; max-width: 1340px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
   .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; flex-shrink: 0; }
   .nav-logo .badge { height: 46px; width: auto; flex-shrink: 0; }
-  .nav-logo .sign { height: 34px; width: auto; flex-shrink: 0; }
+  .nav-logo .sign { height: 30px; width: auto; flex-shrink: 0; }
   .nav-links { display: flex; gap: 20px; list-style: none; margin: 0 auto; }
   .nav-links a {
     color: var(--bone); text-decoration: none; font-family: 'Big Shoulders', sans-serif; font-weight: 700;
@@ -191,7 +191,7 @@
   .nav-phone:hover { color: #fff; }
 
   /* nav must never crowd: tighten, then drop to the hamburger before anything clips */
-  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .badge { height: 40px; } .nav-logo .sign { height: 30px; } }
+  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .badge { height: 40px; } .nav-logo .sign { height: 26px; } }
   @media (max-width: 1240px) { .nav-phone { display: none; } }
   @media (max-width: 1080px) { .nav-links, .nav-right { display: none; } .mobile-actions { display: flex !important; } }
 
@@ -205,7 +205,7 @@
   .nav-drawer { position: fixed; top: 0; right: 0; width: 348px; max-width: 90vw; height: 100dvh; background: var(--navy); z-index: 1001; transform: translateX(100%); transition: transform 0.32s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; box-shadow: -2px 0 28px rgba(0,0,0,0.4); padding-top: env(safe-area-inset-top); }
   .nav-drawer.open { transform: translateX(0); }
   .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line-dark); }
-  .drawer-header .sign { height: 34px; width: auto; }
+  .drawer-header .sign { height: 28px; width: auto; }
   .drawer-close { background: none; border: none; font-size: 1.7rem; line-height: 1; color: var(--bone); cursor: pointer; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; }
   .drawer-close:hover { color: #fff; }
   .drawer-links { display: flex; flex-direction: column; flex: 1; overflow-y: auto; min-height: 0; }
@@ -520,7 +520,7 @@
   .footer-brand address a:hover { color: #fff; }
   .footer-brand address .big { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.55rem; letter-spacing: 0.02em; line-height: 1; }
   .footer-brand address span { color: var(--bone-mute); }
-  .footer-brand .sign { height: 62px; width: auto; display: block; }
+  .footer-brand .sign { height: 44px; width: auto; display: block; }
   .footer-brand .tag { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bone-mute); margin: 12px 0 16px; font-weight: 600; }
   .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 330px; margin-bottom: 14px; }
   .footer-social a { color: var(--bone); text-decoration: none; font-weight: 600; font-size: 0.92rem; border-bottom: 1px solid rgba(244,243,238,0.35); padding-bottom: 1px; }
@@ -563,7 +563,7 @@
     .mobile-actions { display: flex; }
     .nav-logo { gap: 8px; }
     .nav-logo .badge { height: 34px; }
-    .nav-logo .sign { height: 25px; }
+    .nav-logo .sign { height: 24px; }
 
     .hero { padding: calc(var(--nav-h-sm) + 36px) 20px 0; }
     .hero-bg { background-position: 68% 50%; }
@@ -694,7 +694,7 @@
   <div class="nav-inner">
     <a href="#top" class="nav-logo" aria-label="Cooper Crane home">
       <img class="badge" src="assets/logo-badge.png" alt="" width="512" height="512">
-      <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
+      <img class="sign" src="assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
     </a>
     <ul class="nav-links">
       <li><a href="#fleet">The Fleet</a></li>
@@ -720,7 +720,7 @@
 <div class="nav-overlay" id="navOverlay"></div>
 <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
   <div class="drawer-header">
-    <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
+    <img class="sign" src="assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
   </div>
   <nav class="drawer-links" aria-label="Mobile navigation">
@@ -1125,7 +1125,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
+      <img class="sign" src="assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
       <p class="tag">Southeast Florida Crane Service</p>
       <p>Certified-operator crane and boom truck service across Palm Beach, Broward and Miami-Dade, from a 2-ton mini spider crane to a 40-ton mobile crane.</p>
       <address>
