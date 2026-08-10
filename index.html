@@ -174,13 +174,13 @@
     display: flex; align-items: center; padding: 0 30px;
     background: var(--navy); border-bottom: 2px solid var(--red);
   }
-  .nav-inner { width: 100%; max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+  .nav-inner { width: 100%; max-width: 1340px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
   /* Logo slot: swap this typographic lockup for the real mark when the client supplies one */
   .nav-logo .mk { font-size: 1.05rem; line-height: 1; }
   .nav-logo .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; line-height: 0.95; }
   .nav-logo .tag { display: block; font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 0.55rem; color: var(--bone-mute); letter-spacing: 0.26em; text-transform: uppercase; margin-top: 2px; white-space: nowrap; }
-  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links { display: flex; gap: 20px; list-style: none; }
   .nav-links a {
     color: var(--bone); text-decoration: none; font-family: 'Big Shoulders', sans-serif; font-weight: 700;
     font-size: 1.08rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 0; position: relative; transition: color 0.2s ease; white-space: nowrap;
@@ -188,9 +188,14 @@
   .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px; background: var(--red); transition: width 0.22s ease; }
   .nav-links a:hover { color: #fff; }
   .nav-links a:hover::after { width: 100%; }
-  .nav-right { display: flex; gap: 18px; align-items: center; }
+  .nav-right { display: flex; gap: 14px; align-items: center; flex-shrink: 0; }
   .nav-phone { color: var(--bone); text-decoration: none; font-weight: 700; font-size: 1.12rem; font-family: 'Big Shoulders', sans-serif; letter-spacing: 0.05em; white-space: nowrap; }
   .nav-phone:hover { color: #fff; }
+
+  /* nav must never crowd: tighten, then drop to the hamburger before anything clips */
+  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .tag { display: none; } }
+  @media (max-width: 1240px) { .nav-phone { display: none; } }
+  @media (max-width: 1080px) { .nav-links, .nav-right { display: none; } .mobile-actions { display: flex !important; } }
 
   .mobile-actions { display: none; gap: 10px; align-items: center; }
   .mobile-call { width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: #fff; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 14px rgba(178,35,53,0.4); }
@@ -233,41 +238,57 @@
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .hero-ctas .btn { padding: 17px 30px; font-size: 1.24rem; }
 
-  /* ===== QUICK QUOTE (3-step, P&C qq pattern re-skinned) ===== */
-  .qq { background: #fff; border-radius: 6px; box-shadow: var(--shadow-md); padding: 26px 26px 22px; border-top: 5px solid var(--red); }
-  .qq-head b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.62rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.05; }
-  .qq-head span { font-size: 0.92rem; color: var(--ink-soft); display: block; margin-top: 4px; }
-  .qq-prog { display: flex; gap: 6px; margin: 16px 0 18px; }
-  .qq-prog i { flex: 1; height: 4px; border-radius: 2px; background: rgba(23,32,47,0.14); transition: background 0.25s ease; }
-  .qq-prog i.on { background: var(--red); }
+  /* ===== LIFT TICKET (quick quote). Riveted navy header ties it to the Fleet Board. ===== */
+  .qq { background: var(--bone); border-radius: 3px; box-shadow: var(--shadow-md); overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 20px); }
+  .qq-top { position: relative; background: var(--navy); color: var(--bone); padding: 15px 22px 14px; border-bottom: 3px solid var(--red); }
+  .qq-top::before, .qq-top::after { content: ''; position: absolute; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: rgba(244,243,238,0.3); }
+  .qq-top::before { left: 10px; } .qq-top::after { right: 10px; }
+  .qq-tag { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .qq-tag b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.13em; text-transform: uppercase; line-height: 1; }
+  .qq-tag i { font-style: normal; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.86rem; letter-spacing: 0.16em; text-transform: uppercase; color: #E8AEB6; white-space: nowrap; }
+  .qq-top p { font-size: 0.86rem; color: var(--bone-mute); margin-top: 4px; line-height: 1.4; }
+  .qq-bars { display: flex; gap: 4px; margin-top: 12px; }
+  .qq-bars i { flex: 1; height: 3px; background: rgba(244,243,238,0.22); transition: background 0.25s ease; }
+  .qq-bars i.on { background: var(--red); }
+  .qq-body { padding: 20px 22px 20px; }
   .qq-step { display: none; }
   .qq-step.on { display: block; }
-  .qq-tiles { display: flex; flex-direction: column; gap: 8px; }
+  /* current selection, shown on later steps, always changeable */
+  .qq-sel { display: none; align-items: center; gap: 10px; background: #fff; border: 1px dashed rgba(23,32,47,0.28); border-radius: 2px; padding: 9px 12px; margin-bottom: 15px; font-size: 0.86rem; color: var(--ink-soft); }
+  .qq-sel.on { display: flex; }
+  .qq-sel b { color: var(--ink); font-weight: 600; }
+  .qq-sel button { margin-left: auto; background: none; border: none; padding: 0; cursor: pointer; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); white-space: nowrap; }
+  .qq-sel button:hover { color: var(--red-hot); text-decoration: underline; }
+  .qq-tiles { display: flex; flex-direction: column; gap: 7px; }
   .qq-tile { display: block; position: relative; cursor: pointer; }
   .qq-tile input { position: absolute; opacity: 0; pointer-events: none; }
-  .qq-tile span { display: block; border: 1.5px solid rgba(23,32,47,0.16); border-radius: 4px; padding: 11px 14px; transition: border-color 0.18s ease, background 0.18s ease; }
-  .qq-tile b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); display: block; line-height: 1.15; }
-  .qq-tile em { font-style: normal; font-size: 0.85rem; color: var(--ink-soft); display: block; margin-top: 1px; }
-  .qq-tile:hover span { border-color: rgba(178,35,53,0.5); }
-  .qq-tile input:checked + span { border-color: var(--red); background: rgba(178,35,53,0.06); box-shadow: inset 3px 0 0 var(--red); }
+  .qq-tile span { display: grid; grid-template-columns: 15px 1fr; column-gap: 12px; row-gap: 1px; align-items: center; background: #fff; border: 1.5px solid rgba(23,32,47,0.16); border-radius: 2px; padding: 11px 13px; transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+  /* square marker spans both text rows, not a pill or a plain box */
+  .qq-tile span::before { content: ''; grid-column: 1; grid-row: 1 / span 2; align-self: center; width: 15px; height: 15px; border: 2px solid rgba(23,32,47,0.28); transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; }
+  .qq-tile b { grid-column: 2; grid-row: 1; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); line-height: 1.15; }
+  .qq-tile em { grid-column: 2; grid-row: 2; font-style: normal; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.35; }
+  .qq-tile:hover span { border-color: rgba(178,35,53,0.55); }
+  .qq-tile input:checked + span { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+  .qq-tile input:checked + span::before { background: var(--red); border-color: var(--red); box-shadow: inset 0 0 0 2px #fff; }
   .qq-tile input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
   .qq-field { display: flex; flex-direction: column; margin-bottom: 12px; }
-  .qq-field label { font-size: 0.78rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
-  .qq-opt { font-weight: 500; color: var(--ink-soft); text-transform: none; letter-spacing: 0; }
-  .qq-field input { padding: 11px 13px; background: var(--porcelain); border: 1.5px solid rgba(23,32,47,0.18); border-radius: 3px; color: var(--ink); font-family: 'Public Sans', sans-serif; font-size: 0.96rem; }
-  .qq-field input:focus { outline: none; border-color: var(--red); background: #fff; box-shadow: 0 0 0 3px rgba(178,35,53,0.12); }
-  .qq-msg { font-size: 0.8rem; color: var(--ink-soft); margin-top: 5px; }
+  .qq-field label { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin-bottom: 5px; }
+  .qq-opt { font-family: 'Public Sans', sans-serif; font-weight: 500; font-size: 0.74rem; letter-spacing: 0; text-transform: none; color: var(--ink-soft); }
+  .qq-field input { padding: 11px 13px; background: #fff; border: 1.5px solid rgba(23,32,47,0.18); border-radius: 2px; color: var(--ink); font-family: 'Public Sans', sans-serif; font-size: 0.96rem; }
+  .qq-field input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(178,35,53,0.12); }
+  .qq-msg { font-size: 0.79rem; color: var(--ink-soft); margin-top: 5px; }
   .qq-err { display: none; font-size: 0.82rem; font-weight: 600; color: var(--red-hot); margin-top: 9px; }
   .qq-err.show { display: block; }
   .qq-nav { display: flex; gap: 9px; margin-top: 16px; }
-  .qq-nav .btn { flex: 1; padding: 13px 18px; font-size: 1.08rem; }
-  .qq-back { flex: 0 0 auto !important; background: transparent; color: var(--ink) !important; border: 1.5px solid rgba(23,32,47,0.22); box-shadow: none; padding: 13px 18px; border-radius: 2px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.08rem; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
-  .qq-back:hover { background: rgba(23,32,47,0.05); }
+  .qq-nav .btn { flex: 1; padding: 13px 18px; font-size: 1.1rem; }
+  .qq-back { flex: 0 0 auto; background: transparent; color: var(--ink); border: 1.5px solid rgba(23,32,47,0.24); box-shadow: none; padding: 13px 17px; border-radius: 2px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
+  .qq-back:hover { background: rgba(23,32,47,0.06); }
   .qq-hp { position: absolute; left: -9999px; }
-  .qq-done { display: none; text-align: center; padding: 12px 4px 6px; }
+  .qq-done { display: none; padding: 4px 0 2px; }
   .qq-done.on { display: block; }
   .qq-done b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 6px; }
-  .qq-done p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 14px; }
+  .qq-done p { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 14px; }
+  .qq-done .btn { width: 100%; }
 
   /* thin flag-stripe seam, the single stripe motif on the page */
   .hero-stripe { position: relative; z-index: 2; height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 72px, var(--bone) 72px 144px); opacity: 0.92; }
@@ -552,9 +573,11 @@
     .hero-inner { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
     .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .hero-ctas .btn { width: 100%; padding: 15px 18px; font-size: 1.15rem; }
-    .qq { padding: 20px 18px 18px; }
-    .qq-head b { font-size: 1.42rem; }
-    .qq-nav .btn { font-size: 1.02rem; padding: 13px 14px; }
+    .qq-body { padding: 17px 16px 17px; }
+    .qq-top { padding: 13px 16px 12px; }
+    .qq-tag b { font-size: 1.16rem; }
+    .qq-nav .btn { font-size: 1.02rem; padding: 13px 12px; }
+    .qq-back { font-size: 1.02rem; padding: 13px 14px; }
     .cred-rail-inner { flex-direction: column; gap: 0; padding: 6px 0 8px; }
     .cred { padding: 7px 0; border-bottom: 1px solid rgba(244,243,238,0.08); }
     .cred:last-child { border-bottom: none; }
@@ -681,7 +704,7 @@
     </ul>
     <div class="nav-right">
       <a href="tel:+19544456186" class="nav-phone" data-call>(954) 445-6186</a>
-      <a href="#contact" class="btn btn-sm">Get a Lift Quote</a>
+      <a href="#qq" class="btn btn-sm">Get a Lift Quote</a>
     </div>
     <div class="mobile-actions">
       <a href="tel:+19544456186" class="mobile-call" aria-label="Call Cooper Crane" data-call>
@@ -712,7 +735,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
       (954) 445-6186
     </a>
-    <a href="#contact" class="btn drawer-cta">Get a Lift Quote</a>
+    <a href="#qq" class="btn drawer-cta">Get a Lift Quote</a>
   </div>
 </aside>
 
@@ -730,62 +753,67 @@
       </div>
     </div>
 
-    <!-- 3-step quick quote: sits between the call CTA and the credentials rail -->
+    <!-- Lift ticket: 3-step quick quote. Sits between the call CTA and the credentials rail. -->
     <form class="qq" id="qq" novalidate>
       <p class="qq-hp"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
-      <div class="qq-head">
-        <b>Price my lift</b>
-        <span>Three quick questions. We call you back with a number.</span>
+      <div class="qq-top">
+        <div class="qq-tag"><b>Lift Ticket</b><i id="qqCount">Step 1 / 3</i></div>
+        <p>Three questions. We call you back with a number.</p>
+        <div class="qq-bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
       </div>
-      <div class="qq-prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+      <div class="qq-body">
+        <div class="qq-sel" id="qqSel">Lifting: <b id="qqSelVal"></b><button type="button" id="qqChange">Change</button></div>
 
-      <div class="qq-step on" data-step="1">
-        <div class="qq-tiles" role="radiogroup" aria-label="What needs lifting">
-          <label class="qq-tile"><input type="radio" name="load" value="Rooftop AC unit"><span><b>Rooftop AC unit</b><em>Condenser or air handler onto a curb</em></span></label>
-          <label class="qq-tile"><input type="radio" name="load" value="Trusses or roofing material"><span><b>Trusses or roofing</b><em>Truss packages, tile, shingle bundles</em></span></label>
-          <label class="qq-tile"><input type="radio" name="load" value="Generator"><span><b>Generator</b><em>Standby set onto a pad or roof</em></span></label>
-          <label class="qq-tile"><input type="radio" name="load" value="Something else"><span><b>Something else</b><em>Tarps, steel, trees, hot tubs, not sure</em></span></label>
+        <div class="qq-step on" data-step="1">
+          <div class="qq-tiles" role="radiogroup" aria-label="What needs lifting">
+            <label class="qq-tile"><input type="radio" name="load" value="Rooftop AC unit"><span><b>Rooftop AC unit</b><em>Condenser or air handler onto a curb</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Trusses or roofing material"><span><b>Trusses or roofing</b><em>Truss packages, tile, shingle bundles</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Generator"><span><b>Generator</b><em>Standby set onto a pad or roof</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Pest-control tarps"><span><b>Pest-control tarps</b><em>Fumigation tenting over the roofline</em></span></label>
+            <label class="qq-tile"><input type="radio" name="load" value="Something else"><span><b>Something else</b><em>Steel, trees, hot tubs, tight access, not sure</em></span></label>
+          </div>
+          <div class="qq-err" id="qqE1">Tap the closest one. We sort the details on the call.</div>
         </div>
-        <div class="qq-err" id="qqE1">Tap the closest one. We sort the details on the call.</div>
-        <div class="qq-nav"><button type="button" class="btn qq-next">Next</button></div>
-      </div>
 
-      <div class="qq-step" data-step="2">
-        <div class="qq-field">
-          <label for="qq-where">Where is the job?</label>
-          <input type="text" id="qq-where" name="where" placeholder="City or job site, e.g. Hollywood" autocomplete="address-level2">
-          <div class="qq-msg">A city is enough to price the drive from our Broward yard.</div>
+        <div class="qq-step" data-step="2">
+          <div class="qq-field">
+            <label for="qq-where">Where is the job?</label>
+            <input type="text" id="qq-where" name="where" placeholder="City or job site, e.g. Hollywood" autocomplete="address-level2">
+            <div class="qq-msg">A city is enough to price the drive from our Broward yard.</div>
+          </div>
+          <div class="qq-field">
+            <label for="qq-reach">How high and how heavy? <span class="qq-opt">optional</span></label>
+            <input type="text" id="qq-reach" name="reach" placeholder="e.g. 600 lb, two stories, tight side yard">
+          </div>
+          <div class="qq-err" id="qqE2">Give us a city so we can price the drive.</div>
+          <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="button" class="btn qq-next">Next</button></div>
         </div>
-        <div class="qq-field">
-          <label for="qq-reach">How high and how heavy? <span class="qq-opt">optional</span></label>
-          <input type="text" id="qq-reach" name="reach" placeholder="e.g. 600 lb, two stories, tight side yard">
-        </div>
-        <div class="qq-err" id="qqE2">Give us a city so we can price the drive.</div>
-        <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="button" class="btn qq-next">Next</button></div>
-      </div>
 
-      <div class="qq-step" data-step="3">
-        <div class="qq-field">
-          <label for="qq-name">Name or business</label>
-          <input type="text" id="qq-name" name="name" placeholder="Jane Contractor" autocomplete="name">
+        <div class="qq-step" data-step="3">
+          <div class="qq-field">
+            <label for="qq-name">Name or business</label>
+            <input type="text" id="qq-name" name="name" placeholder="Jane Contractor" autocomplete="name">
+          </div>
+          <div class="qq-field">
+            <label for="qq-phone">Phone</label>
+            <input type="tel" id="qq-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+          </div>
+          <div class="qq-field">
+            <label for="qq-email">Email <span class="qq-opt">optional</span></label>
+            <input type="email" id="qq-email" name="email" placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="qq-err" id="qqE3">We need a name and a number to call you back.</div>
+          <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="submit" class="btn">Send It</button></div>
         </div>
-        <div class="qq-field">
-          <label for="qq-phone">Phone</label>
-          <input type="tel" id="qq-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
-        </div>
-        <div class="qq-field">
-          <label for="qq-email">Email <span class="qq-opt">optional</span></label>
-          <input type="email" id="qq-email" name="email" placeholder="you@email.com" autocomplete="email">
-        </div>
-        <div class="qq-err" id="qqE3">We need a name and a number to call you back.</div>
-        <div class="qq-nav"><button type="button" class="qq-back">Back</button><button type="submit" class="btn">Send It</button></div>
-      </div>
 
-      <div class="qq-done" id="qqDone" role="status">
-        <b>Sent. Talk shortly.</b>
-        <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
-        <a href="tel:+19544456186" class="btn" data-call>Or call now: (954) 445-6186</a>
+        <div class="qq-done" id="qqDone" role="status">
+          <b>Sent. Talk shortly.</b>
+          <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
+          <a href="tel:+19544456186" class="btn" data-call>Or call now: (954) 445-6186</a>
+        </div>
       </div>
+    </form>
+  </div>
     </form>
   </div>
   <div class="hero-stripe" aria-hidden="true"></div>
@@ -830,7 +858,7 @@
   </div>
   <div class="fleet-foot">
     <p><strong>Not sure which machine you need?</strong> Give us the weight, the height and the reach, and we spec the right crane in one call.</p>
-    <a href="#contact" class="btn">Spec My Lift</a>
+    <a href="#qq" class="btn">Spec My Lift</a>
   </div>
 </section>
 
@@ -841,7 +869,7 @@
       <h2 class="headline">If It Needs to Go Up, Over or Down, You Call Us</h2>
       <p>These are the lifts Southeast Florida calls us for most. Tap any one for how it actually runs: what we need from you, what the crane has to reach, and what slows a job down.</p>
       <p>If yours is not on the list, that changes nothing. <strong>If you can rig it, we can lift it.</strong></p>
-      <a href="#contact" class="btn">Tell Us Your Lift</a>
+      <a href="#qq" class="btn">Tell Us Your Lift</a>
     </div>
     <div class="zz">
       <article class="zz-row">
@@ -926,7 +954,7 @@
     </div>
     <div class="flow-foot">
       <p><strong>What moves the price:</strong> the machine your load requires, how long we are on site, and the drive from our Broward yard. Ask and we will tell you before anyone books anything.</p>
-      <a href="#contact" class="btn">Get My Number</a>
+      <a href="#qq" class="btn">Get My Number</a>
     </div>
   </div>
 </section>
@@ -950,7 +978,7 @@
         <li><span class="mk" aria-hidden="true">&#9632;</span><div><b>One yard, staged for the coast</b><span>Machines based in Broward reach West Palm Beach to South Miami without a routing runaround.</span></div></li>
         <li><span class="mk" aria-hidden="true">&#9632;</span><div><b>Clear, easy billing</b><span>QuickBooks invoicing with credit card, Cash App and Zelle accepted. No surprises on the paperwork.</span></div></li>
       </ul>
-      <a href="#contact" class="btn">Get a Lift Quote</a>
+      <a href="#qq" class="btn">Get a Lift Quote</a>
     </div>
     <div class="why-photo">
       <img src="assets/cc-spider-indoor.jpg" alt="Cooper Crane mini spider crane working an indoor glass installation inside a Florida atrium" loading="lazy">
@@ -986,7 +1014,7 @@
       <span class="lead">One call covers all of it</span>
       <a href="tel:+19544456186" class="big-phone" data-call>(954) 445-6186</a>
       <a href="mailto:Coopercranefl@gmail.com" class="mail">Coopercranefl@gmail.com</a>
-      <a href="#contact" class="btn">Get a Lift Quote</a>
+      <a href="#qq" class="btn">Get a Lift Quote</a>
     </div>
   </div>
 </section>
@@ -1028,7 +1056,7 @@
     <div class="faq-intro">
       <h2 class="headline">Crane Rental, Answered</h2>
       <p>The questions we hear most before a lift. Still unsure what you need? A two-minute call sorts it out.</p>
-      <a href="#contact" class="btn">Get a Lift Quote</a>
+      <a href="#qq" class="btn">Get a Lift Quote</a>
     </div>
     <div class="accordion" id="accordion">
       <div class="acc-item"><button class="acc-header" aria-expanded="false">What size cranes do you have? <span class="pm" aria-hidden="true">+</span></button><div class="acc-content"><div class="acc-text">The fleet runs from a 2-ton mini spider crane that fits through a standard gate up to a 40-ton mobile crane, with 17-ton and 35-ton boom trucks in between, plus accessories.</div></div></div>
@@ -1201,48 +1229,64 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
     });
   });
 
-  // ===== Quick quote: 3 steps, validate per step, mailto handoff =====
+  // ===== Lift ticket: 3 steps, auto-advance on tile tap, selection always changeable =====
   (function () {
     const form = document.getElementById('qq');
     if (!form) return;
     const steps = [...form.querySelectorAll('.qq-step')];
-    const dots = [...form.querySelectorAll('.qq-prog i')];
+    const bars = [...form.querySelectorAll('.qq-bars i')];
+    const count = document.getElementById('qqCount');
+    const sel = document.getElementById('qqSel');
+    const selVal = document.getElementById('qqSelVal');
     const done = document.getElementById('qqDone');
     let cur = 0;
+
+    function picked() { const r = form.querySelector('input[name=load]:checked'); return r ? r.value : ''; }
+    function paintSel() {
+      const v = picked();
+      // the chosen load shows on later steps and can always be changed
+      if (v && cur > 0) { selVal.textContent = v; sel.classList.add('on'); }
+      else sel.classList.remove('on');
+    }
     function show(i) {
       cur = i;
       steps.forEach((s, n) => s.classList.toggle('on', n === i));
-      dots.forEach((d, n) => d.classList.toggle('on', n <= i));
+      bars.forEach((b, n) => b.classList.toggle('on', n <= i));
+      if (count) count.textContent = 'Step ' + (i + 1) + ' / 3';
       form.querySelectorAll('.qq-err').forEach(e => e.classList.remove('show'));
+      paintSel();
     }
     function valid(i) {
       const err = document.getElementById('qqE' + (i + 1));
       let ok = true;
-      if (i === 0) ok = !!form.querySelector('input[name=load]:checked');
+      if (i === 0) ok = !!picked();
       if (i === 1) ok = form.where.value.trim().length > 1;
       if (i === 2) ok = form.name.value.trim().length > 0 && form.phone.value.trim().length > 0;
       if (!ok && err) err.classList.add('show');
       return ok;
     }
+    // picking a tile advances straight to the next question
+    form.querySelectorAll('input[name=load]').forEach(r => r.addEventListener('change', () => {
+      document.getElementById('qqE1').classList.remove('show');
+      if (cur === 0) setTimeout(() => show(1), 140);
+      else paintSel();
+    }));
+    document.getElementById('qqChange').addEventListener('click', () => show(0));
     form.querySelectorAll('.qq-next').forEach(b => b.addEventListener('click', () => {
       if (valid(cur)) show(Math.min(cur + 1, steps.length - 1));
     }));
     form.querySelectorAll('.qq-back').forEach(b => b.addEventListener('click', () => show(Math.max(cur - 1, 0))));
-    form.querySelectorAll('input[name=load]').forEach(r => r.addEventListener('change', () => {
-      document.getElementById('qqE1').classList.remove('show');
-    }));
     form.querySelectorAll('input').forEach(el => el.addEventListener('input', () => {
       const e = document.getElementById('qqE' + (cur + 1)); if (e) e.classList.remove('show');
     }));
     form.addEventListener('submit', e => {
       e.preventDefault();
-      if (form.company.value) return;            // honeypot
+      if (form.company.value) return;               // honeypot
       if (!valid(2)) return;
-      track('qualify_lead', { form_name: 'quick-quote' });
-      const load = (form.querySelector('input[name=load]:checked') || {}).value || '(not given)';
+      track('qualify_lead', { form_name: 'lift-ticket' });
       const subject = encodeURIComponent('Lift quote request: ' + form.name.value.trim());
       const body = encodeURIComponent(
-        'What needs lifting: ' + load +
+        'What needs lifting: ' + (picked() || '(not given)') +
         '\nWhere: ' + form.where.value.trim() +
         '\nHeight / weight: ' + (form.reach.value.trim() || '(not given)') +
         '\n\nName/business: ' + form.name.value.trim() +
@@ -1250,9 +1294,18 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
         '\nEmail: ' + (form.email.value.trim() || '(not given)'));
       window.location.href = 'mailto:Coopercranefl@gmail.com?subject=' + subject + '&body=' + body;
       steps.forEach(s => s.classList.remove('on'));
-      form.querySelector('.qq-prog').style.display = 'none';
+      sel.classList.remove('on');
       done.classList.add('on');
+      if (count) count.textContent = 'Done';
+      bars.forEach(b => b.classList.add('on'));
     });
+
+    // service pages preselect a load and open on question two; still changeable
+    const pre = form.getAttribute('data-preselect');
+    if (pre) {
+      const hit = [...form.querySelectorAll('input[name=load]')].find(r => r.value === pre);
+      if (hit) { hit.checked = true; show(1); }
+    }
   })();
 
   // ===== Review carousel dots (mobile only; desktop keeps the featured layout) =====
