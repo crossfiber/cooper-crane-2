@@ -1,5 +1,5 @@
 
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     /* Palette: flag-derived AND fleet-derived. Navy structure, fleet red action, bone neutrals. */
@@ -62,10 +62,10 @@
     background: var(--navy); border-bottom: 2px solid var(--red);
   }
   .nav-inner { width: 100%; max-width: 1340px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
-  .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; margin-right: auto; flex-shrink: 0; }
+  .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; flex-shrink: 0; }
   .nav-logo .badge { height: 46px; width: auto; flex-shrink: 0; }
   .nav-logo .sign { height: 34px; width: auto; flex-shrink: 0; }
-  .nav-links { display: flex; gap: 20px; list-style: none; }
+  .nav-links { display: flex; gap: 20px; list-style: none; margin: 0 auto; }
   .nav-links a {
     color: var(--bone); text-decoration: none; font-family: 'Big Shoulders', sans-serif; font-weight: 700;
     font-size: 1.08rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 0; position: relative; transition: color 0.2s ease; white-space: nowrap;
@@ -488,7 +488,7 @@
     .zz-row { grid-template-columns: 1fr; gap: 0; }
     .zz-row:nth-child(even) .zz-media { order: 0; }
     .zz-media { aspect-ratio: 16 / 10; }
-    .zz-row { height: 100%; display: flex; flex-direction: column; }
+    .zz-row { height: 100%; display: flex; flex-direction: column; align-items: stretch; text-align: left; }
     .zz-media { margin: 10px 10px 0; border-radius: 3px; }
     .zz-text, .zz-row:nth-child(even) .zz-text { padding: 11px 10px 12px; flex: 1; }
     .zz-no { font-size: 0.8rem; margin-bottom: 3px; }

@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://crossfiber.github.io/cooper-crane-2/sitemap.xml
+Sitemap: https://coopercrane.com/sitemap.xml
