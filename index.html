@@ -175,11 +175,9 @@
     background: var(--navy); border-bottom: 2px solid var(--red);
   }
   .nav-inner { width: 100%; max-width: 1340px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
-  /* Logo slot: swap this typographic lockup for the real mark when the client supplies one */
-  .nav-logo .mk { font-size: 1.05rem; line-height: 1; }
-  .nav-logo .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; line-height: 0.95; }
-  .nav-logo .tag { display: block; font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 0.55rem; color: var(--bone-mute); letter-spacing: 0.26em; text-transform: uppercase; margin-top: 2px; white-space: nowrap; }
+  .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; margin-right: auto; flex-shrink: 0; }
+  .nav-logo .badge { height: 46px; width: auto; flex-shrink: 0; }
+  .nav-logo .sign { height: 34px; width: auto; flex-shrink: 0; }
   .nav-links { display: flex; gap: 20px; list-style: none; }
   .nav-links a {
     color: var(--bone); text-decoration: none; font-family: 'Big Shoulders', sans-serif; font-weight: 700;
@@ -193,7 +191,7 @@
   .nav-phone:hover { color: #fff; }
 
   /* nav must never crowd: tighten, then drop to the hamburger before anything clips */
-  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .tag { display: none; } }
+  @media (max-width: 1420px) { .nav-inner { gap: 15px; } .nav-links { gap: 16px; } .nav-logo .badge { height: 40px; } .nav-logo .sign { height: 30px; } }
   @media (max-width: 1240px) { .nav-phone { display: none; } }
   @media (max-width: 1080px) { .nav-links, .nav-right { display: none; } .mobile-actions { display: flex !important; } }
 
@@ -207,8 +205,7 @@
   .nav-drawer { position: fixed; top: 0; right: 0; width: 348px; max-width: 90vw; height: 100dvh; background: var(--navy); z-index: 1001; transform: translateX(100%); transition: transform 0.32s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; box-shadow: -2px 0 28px rgba(0,0,0,0.4); padding-top: env(safe-area-inset-top); }
   .nav-drawer.open { transform: translateX(0); }
   .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line-dark); }
-  .drawer-header .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; }
-  .drawer-header .wm .star { margin-right: 6px; }
+  .drawer-header .sign { height: 34px; width: auto; }
   .drawer-close { background: none; border: none; font-size: 1.7rem; line-height: 1; color: var(--bone); cursor: pointer; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; }
   .drawer-close:hover { color: #fff; }
   .drawer-links { display: flex; flex-direction: column; flex: 1; overflow-y: auto; min-height: 0; }
@@ -241,8 +238,6 @@
   /* ===== LIFT TICKET (quick quote). Riveted navy header ties it to the Fleet Board. ===== */
   .qq { background: var(--bone); border-radius: 3px; box-shadow: var(--shadow-md); overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 20px); }
   .qq-top { position: relative; background: var(--navy); color: var(--bone); padding: 15px 22px 14px; border-bottom: 3px solid var(--red); }
-  .qq-top::before, .qq-top::after { content: ''; position: absolute; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: rgba(244,243,238,0.3); }
-  .qq-top::before { left: 10px; } .qq-top::after { right: 10px; }
   .qq-tag { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .qq-tag b { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.13em; text-transform: uppercase; line-height: 1; }
   .qq-tag i { font-style: normal; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.86rem; letter-spacing: 0.16em; text-transform: uppercase; color: #E8AEB6; white-space: nowrap; }
@@ -294,7 +289,7 @@
   .hero-stripe { position: relative; z-index: 2; height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 72px, var(--bone) 72px 144px); opacity: 0.92; }
 
   /* credentials, plain inline row on the hero navy */
-  .cred-rail { position: relative; z-index: 2; border-top: 1px solid var(--line-dark); background: rgba(13,21,36,0.6); }
+  .cred-rail { position: relative; z-index: 2; background: var(--navy-deep); }
   .cred-rail-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px 54px; padding: 20px 0; }
   .cred { font-size: 0.94rem; color: var(--bone-mute); }
   .cred b { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.16rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bone); display: block; line-height: 1.1; }
@@ -425,8 +420,13 @@
   .area-text .headline { font-size: clamp(2rem, 3.4vw, 2.9rem); margin-bottom: 14px; }
   .area-text > p { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.65; margin-bottom: 18px; }
   .counties { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .county { background: var(--navy); color: var(--bone); border-radius: 2px; padding: 7px 14px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
-  .area-cities { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 24px; }
+  .county { background: var(--navy); color: var(--bone); text-decoration: none; border-radius: 2px; padding: 7px 14px; transition: background 0.18s ease; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .county:hover { background: var(--red); }
+  .area-cities { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.9; margin-bottom: 18px; }
+  .area-cities a { color: var(--ink); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(178,35,53,0.4); }
+  .area-cities a:hover { color: var(--red); }
+  .area-pagelink { display: inline-flex; align-items: center; gap: 8px; font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 1.06rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); text-decoration: none; }
+  .area-pagelink:hover { color: var(--red-hot); }
   .area-contact { background: var(--navy); color: var(--bone); padding: 44px 46px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
   .area-contact .lead { font-family: 'Big Shoulders', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase; color: #E8AEB6; margin-bottom: 6px; }
   .area-contact .big-phone { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.4vw, 2.8rem); color: var(--bone); text-decoration: none; line-height: 1; letter-spacing: 0.02em; }
@@ -520,9 +520,8 @@
   .footer-brand address a:hover { color: #fff; }
   .footer-brand address .big { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.55rem; letter-spacing: 0.02em; line-height: 1; }
   .footer-brand address span { color: var(--bone-mute); }
-  .footer-brand .wm { font-family: 'Big Shoulders', sans-serif; font-weight: 800; font-size: 1.7rem; color: var(--bone); letter-spacing: 0.04em; text-transform: uppercase; }
-  .footer-brand .wm .star { margin-right: 7px; }
-  .footer-brand .tag { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bone-mute); margin: 5px 0 16px; font-weight: 600; }
+  .footer-brand .sign { height: 62px; width: auto; display: block; }
+  .footer-brand .tag { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bone-mute); margin: 12px 0 16px; font-weight: 600; }
   .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 330px; margin-bottom: 14px; }
   .footer-social a { color: var(--bone); text-decoration: none; font-weight: 600; font-size: 0.92rem; border-bottom: 1px solid rgba(244,243,238,0.35); padding-bottom: 1px; }
   .footer-social a:hover { color: #fff; border-color: #fff; }
@@ -562,7 +561,9 @@
     nav.site-nav { padding: 0 18px; height: var(--nav-h-sm); }
     .nav-links, .nav-right { display: none; }
     .mobile-actions { display: flex; }
-    .nav-logo .tag { display: none; }
+    .nav-logo { gap: 8px; }
+    .nav-logo .badge { height: 34px; }
+    .nav-logo .sign { height: 25px; }
 
     .hero { padding: calc(var(--nav-h-sm) + 36px) 20px 0; }
     .hero-bg { background-position: 68% 50%; }
@@ -601,7 +602,8 @@
     .zz-row:nth-child(even) .zz-media { order: 0; }
     .zz-media { aspect-ratio: 16 / 10; }
     .zz-row { height: 100%; display: flex; flex-direction: column; }
-    .zz-text, .zz-row:nth-child(even) .zz-text { padding: 12px 13px 14px; flex: 1; }
+    .zz-media { margin: 10px 10px 0; border-radius: 3px; }
+    .zz-text, .zz-row:nth-child(even) .zz-text { padding: 11px 10px 12px; flex: 1; }
     .zz-no { font-size: 0.8rem; margin-bottom: 3px; }
     .zz-text h3 { font-size: 1.06rem; margin-bottom: 0; line-height: 1.1; }
     .zz-text p { display: none; }
@@ -691,15 +693,14 @@
 <nav class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a href="#top" class="nav-logo" aria-label="Cooper Crane home">
-      <!-- [LOGO ASSET NEEDED FROM CLIENT] typographic lockup stands in until a real mark exists -->
-      <span class="mk star" aria-hidden="true">&#9733;</span>
-      <span><span class="wm">Cooper Crane</span><span class="tag">Southeast Florida Crane Service</span></span>
+      <img class="badge" src="assets/logo-badge.png" alt="" width="512" height="512">
+      <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
     </a>
     <ul class="nav-links">
       <li><a href="#fleet">The Fleet</a></li>
       <li><a href="#lift">What We Lift</a></li>
-      <li><a href="#why">Why Cooper</a></li>
-      <li><a href="#area">Service Area</a></li>
+      <li><a href="service-areas/">Service Areas</a></li>
+      <li><a href="#how">How It Works</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="nav-right">
@@ -719,7 +720,7 @@
 <div class="nav-overlay" id="navOverlay"></div>
 <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
   <div class="drawer-header">
-    <span class="wm"><span class="star" aria-hidden="true">&#9733;</span>Cooper Crane</span>
+    <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
   </div>
   <nav class="drawer-links" aria-label="Mobile navigation">
@@ -727,7 +728,7 @@
     <a href="#lift">What We Lift</a>
     <a href="#why">Why Cooper</a>
     <a href="#work">Recent Lifts</a>
-    <a href="#area">Service Area</a>
+    <a href="service-areas/">Service Areas</a>
     <a href="#faq">FAQ</a>
   </nav>
   <div class="drawer-footer">
@@ -1007,8 +1008,9 @@
     <div class="area-text">
       <h2 class="headline">Every Job From West Palm Beach to South Miami</h2>
       <p>One yard, one number. Cooper Crane is based in Broward and staged for the whole Atlantic coast of South Florida, so the machine and the operator show up from down the road, not across the state.</p>
-      <div class="counties"><span class="county">Palm Beach</span><span class="county">Broward</span><span class="county">Miami-Dade</span></div>
-      <p class="area-cities">West Palm Beach &middot; Boca Raton &middot; Deerfield Beach &middot; Pompano Beach &middot; Fort Lauderdale &middot; Hollywood &middot; Pembroke Pines &middot; Hialeah &middot; Miami &middot; South Miami and everywhere between.</p>
+      <div class="counties"><a class="county" href="service-areas/palm-beach-county/">Palm Beach</a><a class="county" href="service-areas/broward-county/">Broward</a><a class="county" href="service-areas/miami-dade-county/">Miami-Dade</a></div>
+      <p class="area-cities"><a href="service-areas/west-palm-beach/">West Palm Beach</a> &middot; <a href="service-areas/boca-raton/">Boca Raton</a> &middot; <a href="service-areas/fort-lauderdale/">Fort Lauderdale</a> &middot; <a href="service-areas/hollywood/">Hollywood</a> &middot; <a href="service-areas/miami/">Miami</a> &middot; Pompano Beach &middot; Pembroke Pines &middot; Hialeah and everywhere between.</p>
+      <a class="area-pagelink" href="service-areas/">See every service area <i aria-hidden="true">&rarr;</i></a>
     </div>
     <div class="area-contact">
       <span class="lead">One call covers all of it</span>
@@ -1123,7 +1125,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="wm"><span class="star" aria-hidden="true">&#9733;</span>Cooper Crane</span>
+      <img class="sign" src="assets/logo-sign.png" alt="Cooper Crane" width="732" height="445">
       <p class="tag">Southeast Florida Crane Service</p>
       <p>Certified-operator crane and boom truck service across Palm Beach, Broward and Miami-Dade, from a 2-ton mini spider crane to a 40-ton mobile crane.</p>
       <address>
@@ -1147,12 +1149,12 @@
     <div class="footer-col">
       <h4>Service Area</h4>
       <ul>
-        <li><a href="#area">Palm Beach County</a></li>
-        <li><a href="#area">Broward County</a></li>
-        <li><a href="#area">Miami-Dade County</a></li>
-        <li><a href="#area">West Palm Beach</a></li>
-        <li><a href="#area">Fort Lauderdale</a></li>
-        <li><a href="#area">Miami</a></li>
+        <li><a href="service-areas/palm-beach-county/">Palm Beach County</a></li>
+        <li><a href="service-areas/broward-county/">Broward County</a></li>
+        <li><a href="service-areas/miami-dade-county/">Miami-Dade County</a></li>
+        <li><a href="service-areas/west-palm-beach/">West Palm Beach</a></li>
+        <li><a href="service-areas/fort-lauderdale/">Fort Lauderdale</a></li>
+        <li><a href="service-areas/">All service areas</a></li>
       </ul>
     </div>
     <div class="footer-col wide">
