@@ -344,14 +344,14 @@ def head(title, desc, kw, url, extra_ld=''):
 <meta property="og:url" content="%(url)s">
 <meta property="og:site_name" content="Cooper Crane LLC">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="%(base)sassets/og-card.png">
+<meta property="og:image" content="%(base)sassets/og-card-v2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Cooper Crane LLC. Crane and boom truck service, West Palm Beach to South Miami. (954) 445-6186.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="%(title)s">
 <meta name="twitter:description" content="%(desc)s">
-<meta name="twitter:image" content="%(base)sassets/og-card.png">
+<meta name="twitter:image" content="%(base)sassets/og-card-v2.png">
 <link rel="icon" type="image/png" href="%(p)sassets/favicon.png">
 <link rel="apple-touch-icon" href="%(p)sassets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -516,7 +516,7 @@ def build_area(a):
             ('Do you provide the operator?','Yes. Every crane comes with a certified Cooper Crane operator who handles rigging and signaling. We run the machine; you point at what needs to move.')]
     area_ld = {"@context":"https://schema.org","@type":"LocalBusiness","name":"Cooper Crane LLC","@id":BASE+"#business",
       "url":url,"telephone":"+1-954-445-6186","email":EMAIL,"priceRange":"$$",
-      "image":BASE+"assets/og-card.png",
+      "image":BASE+"assets/og-card-v2.png",
       "address":{"@type":"PostalAddress","addressLocality":"West Park","addressRegion":"FL","postalCode":"33023","addressCountry":"US"},
       "geo":{"@type":"GeoCoordinates","latitude":"25.9837","longitude":"-80.1820"},
       "areaServed":{"@type":"AdministrativeArea" if a['kind']=='county' else "City","name":a['name']},
