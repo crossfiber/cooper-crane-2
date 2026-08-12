@@ -13,7 +13,7 @@ Every subpage sits at depth 2, so the link prefix is always ../../
 import os, json, shutil
 
 PRE = '../../'
-ASSET_V = '9'   # bump on every site.css / site.js change (busts the CDN + phone cache)
+ASSET_V = '10'   # bump on every site.css / site.js change (busts the CDN + phone cache)
 BASE = 'https://coopercrane.com/'
 PHONE_D = '(954) 445-6186'
 PHONE_H = '+19544456186'
@@ -176,8 +176,7 @@ def nav_block():
     return """<nav class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a href="%(p)s" class="nav-logo" aria-label="Cooper Crane home">
-      <img class="badge" src="%(p)sassets/logo-badge.png" alt="" width="512" height="512">
-      <img class="sign" src="%(p)sassets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+      <img class="sign" src="%(p)sassets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
     </a>
     <ul class="nav-links">
       <li><a href="%(p)s#fleet">The Fleet</a></li>
@@ -202,7 +201,7 @@ def nav_block():
 <div class="nav-overlay" id="navOverlay"></div>
 <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
   <div class="drawer-header">
-    <img class="sign" src="%(p)sassets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+    <img class="sign" src="%(p)sassets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
   </div>
   <nav class="drawer-links" aria-label="Mobile navigation">
@@ -229,7 +228,7 @@ def footer_block():
     return """<footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img class="sign" src="%(p)sassets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+      <img class="sign" src="%(p)sassets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
       <p class="tag">Southeast Florida Crane Service</p>
       <p>Certified-operator crane and boom truck service across Palm Beach, Broward and Miami-Dade, from a 2-ton mini spider crane to a 40-ton mobile crane.</p>
       <address>
@@ -278,7 +277,9 @@ def qq_form(preselect):
              ('Pest-control tarps','Pest-control tarps','Fumigation tenting over the roofline'),
              ('Something else','Something else','Steel, trees, hot tubs, tight access, not sure')]
     tl = ''.join('\n            <label class="qq-tile"><input type="radio" name="load" value="%s"><span><b>%s</b><em>%s</em></span></label>' % t for t in tiles)
-    return """    <form class="qq" id="qq" novalidate data-preselect="%s">
+    return """    <form class="qq" id="qq" name="lift-ticket" method="POST" data-netlify="true" netlify-honeypot="company" novalidate data-preselect="%s">
+      <input type="hidden" name="form-name" value="lift-ticket">
+      <input type="hidden" name="page" id="qqPage">
       <p class="qq-hp"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="qq-top">
         <div class="qq-tag"><b>Lift Ticket</b><i id="qqCount">Step 1 / 3</i></div>
@@ -314,13 +315,13 @@ def qq_form(preselect):
         </div>
         <div class="qq-done" id="qqDone" role="status">
           <b>Sent. Talk shortly.</b>
-          <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
+          <p>That came straight through to the yard. We will call you back with a number.</p>
           <a href="tel:%s" class="btn" data-call>Or call now: %s</a>
         </div>
       </div>
     </form>""" % (preselect, tl, PHONE_H, PHONE_D)
 
-JS = """<script src="%sassets/site.js?v=9" defer></script>""" % PRE
+JS = """<script src="%sassets/site.js?v=%s" defer></script>""" % (PRE, ASSET_V)
 
 def head(title, desc, kw, url, extra_ld=''):
     return """<!DOCTYPE html>
@@ -344,20 +345,20 @@ def head(title, desc, kw, url, extra_ld=''):
 <meta property="og:url" content="%(url)s">
 <meta property="og:site_name" content="Cooper Crane LLC">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="%(base)sassets/og-card-v2.png">
+<meta property="og:image" content="%(base)sassets/og-card-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Cooper Crane LLC. Crane and boom truck service, West Palm Beach to South Miami. (954) 445-6186.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="%(title)s">
 <meta name="twitter:description" content="%(desc)s">
-<meta name="twitter:image" content="%(base)sassets/og-card-v2.png">
-<link rel="icon" type="image/png" href="%(p)sassets/favicon.png">
-<link rel="apple-touch-icon" href="%(p)sassets/favicon.png">
+<meta name="twitter:image" content="%(base)sassets/og-card-v3.png">
+<link rel="icon" type="image/png" href="%(p)sassets/favicon.png?v=10">
+<link rel="apple-touch-icon" href="%(p)sassets/apple-touch-icon.png?v=10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,600..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%(p)sassets/site.css?v=9">
+<link rel="stylesheet" href="%(p)sassets/site.css?v=10">
 %(ld)s
 </head>
 <body>
@@ -516,7 +517,7 @@ def build_area(a):
             ('Do you provide the operator?','Yes. Every crane comes with a certified Cooper Crane operator who handles rigging and signaling. We run the machine; you point at what needs to move.')]
     area_ld = {"@context":"https://schema.org","@type":"LocalBusiness","name":"Cooper Crane LLC","@id":BASE+"#business",
       "url":url,"telephone":"+1-954-445-6186","email":EMAIL,"priceRange":"$$",
-      "image":BASE+"assets/og-card-v2.png",
+      "image":BASE+"assets/og-card-v3.png",
       "address":{"@type":"PostalAddress","addressLocality":"West Park","addressRegion":"FL","postalCode":"33023","addressCountry":"US"},
       "geo":{"@type":"GeoCoordinates","latitude":"25.9837","longitude":"-80.1820"},
       "areaServed":{"@type":"AdministrativeArea" if a['kind']=='county' else "City","name":a['name']},
