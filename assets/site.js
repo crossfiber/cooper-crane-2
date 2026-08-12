@@ -105,20 +105,25 @@ if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
       if (form.company.value) return;               // honeypot
       if (!valid(2)) return;
       track('qualify_lead', { form_name: 'lift-ticket' });
-      const subject = encodeURIComponent('Lift quote request: ' + form.name.value.trim());
-      const body = encodeURIComponent(
-        'What needs lifting: ' + (picked() || '(not given)') +
-        '\nWhere: ' + form.where.value.trim() +
-        '\nHeight / weight: ' + (form.reach.value.trim() || '(not given)') +
-        '\n\nName/business: ' + form.name.value.trim() +
-        '\nPhone: ' + form.phone.value.trim() +
-        '\nEmail: ' + (form.email.value.trim() || '(not given)'));
-      window.location.href = 'mailto:Coopercranefl@gmail.com?subject=' + subject + '&body=' + body;
-      steps.forEach(s => s.classList.remove('on'));
-      sel.classList.remove('on');
-      done.classList.add('on');
-      if (count) count.textContent = 'Done';
-      bars.forEach(b => b.classList.add('on'));
+      const pf = document.getElementById('qqPage'); if (pf) pf.value = location.pathname;
+      const btn = form.querySelector('[type=submit]');
+      const lbl = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                   body: new URLSearchParams(new FormData(form)).toString() })
+        .then(r => {
+          if (!r.ok) throw new Error(r.status);
+          steps.forEach(s => s.classList.remove('on'));
+          sel.classList.remove('on');
+          done.classList.add('on');
+          if (count) count.textContent = 'Done';
+          bars.forEach(b => b.classList.add('on'));
+        })
+        .catch(() => {
+          if (btn) { btn.disabled = false; btn.textContent = lbl; }
+          const e3 = document.getElementById('qqE3');
+          if (e3) { e3.textContent = 'That did not send. Call the yard at (954) 445-6186 and we will take it on the phone.'; e3.classList.add('show'); }
+        });
     });
 
     // service pages preselect a load and open on question two; still changeable

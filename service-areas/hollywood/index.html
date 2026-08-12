@@ -19,20 +19,20 @@
 <meta property="og:url" content="https://coopercrane.com/service-areas/hollywood/">
 <meta property="og:site_name" content="Cooper Crane LLC">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://coopercrane.com/assets/og-card-v2.png">
+<meta property="og:image" content="https://coopercrane.com/assets/og-card-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Cooper Crane LLC. Crane and boom truck service, West Palm Beach to South Miami. (954) 445-6186.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Crane Rental in Hollywood | Cooper Crane">
 <meta name="twitter:description" content="Certified-operator crane and boom truck service in Hollywood. 2 to 40 tons, AC units, trusses, roofing, generators. Call (954) 445-6186.">
-<meta name="twitter:image" content="https://coopercrane.com/assets/og-card-v2.png">
-<link rel="icon" type="image/png" href="../../assets/favicon.png">
-<link rel="apple-touch-icon" href="../../assets/favicon.png">
+<meta name="twitter:image" content="https://coopercrane.com/assets/og-card-v3.png">
+<link rel="icon" type="image/png" href="../../assets/favicon.png?v=10">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,600..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=9">
+<link rel="stylesheet" href="../../assets/site.css?v=10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,7 +43,7 @@
   "telephone": "+1-954-445-6186",
   "email": "Coopercranefl@gmail.com",
   "priceRange": "$$",
-  "image": "https://coopercrane.com/assets/og-card-v2.png",
+  "image": "https://coopercrane.com/assets/og-card-v3.png",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "West Park",
@@ -130,8 +130,7 @@
 <nav class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a href="../../" class="nav-logo" aria-label="Cooper Crane home">
-      <img class="badge" src="../../assets/logo-badge.png" alt="" width="512" height="512">
-      <img class="sign" src="../../assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+      <img class="sign" src="../../assets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
     </a>
     <ul class="nav-links">
       <li><a href="../../#fleet">The Fleet</a></li>
@@ -156,7 +155,7 @@
 <div class="nav-overlay" id="navOverlay"></div>
 <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
   <div class="drawer-header">
-    <img class="sign" src="../../assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+    <img class="sign" src="../../assets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
   </div>
   <nav class="drawer-links" aria-label="Mobile navigation">
@@ -269,7 +268,9 @@
       <p>Tell us what needs lifting and where it sits in Hollywood. <strong>Three questions</strong> and we call you back with a real number.</p>
       <span class="alt-call">Rather talk it out? <a href="tel:+19544456186" data-call>(954) 445-6186</a></span>
     </div>
-    <form class="qq" id="qq" novalidate data-preselect="">
+    <form class="qq" id="qq" name="lift-ticket" method="POST" data-netlify="true" netlify-honeypot="company" novalidate data-preselect="">
+      <input type="hidden" name="form-name" value="lift-ticket">
+      <input type="hidden" name="page" id="qqPage">
       <p class="qq-hp"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="qq-top">
         <div class="qq-tag"><b>Lift Ticket</b><i id="qqCount">Step 1 / 3</i></div>
@@ -310,7 +311,7 @@
         </div>
         <div class="qq-done" id="qqDone" role="status">
           <b>Sent. Talk shortly.</b>
-          <p>Your email app opened with the details filled in. Hit send and we will call you back with a number.</p>
+          <p>That came straight through to the yard. We will call you back with a number.</p>
           <a href="tel:+19544456186" class="btn" data-call>Or call now: (954) 445-6186</a>
         </div>
       </div>
@@ -352,7 +353,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img class="sign" src="../../assets/logo-wordmark.png" alt="Cooper Crane" width="2061" height="428">
+      <img class="sign" src="../../assets/logo-lockup.png" alt="Cooper Crane" width="1160" height="240">
       <p class="tag">Southeast Florida Crane Service</p>
       <p>Certified-operator crane and boom truck service across Palm Beach, Broward and Miami-Dade, from a 2-ton mini spider crane to a 40-ton mobile crane.</p>
       <address>
@@ -405,6 +406,6 @@
     </a>
   </div>
 </footer>
-<script src="../../assets/site.js?v=9" defer></script>
+<script src="../../assets/site.js?v=10" defer></script>
 </body>
 </html>
